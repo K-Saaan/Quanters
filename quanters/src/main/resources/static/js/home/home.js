@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // 검색창에 커서가 포커스 됐을 경우 리스트를 show 검색창 각지게 하기
     $("#searchText").focus(function (){
         $(".searchUl").show();
-        $(".searchBar").css("border-radius", "0px")
+        $(".searchBar").css("border-radius", "40px 40px 0px 0px")
     })
     // 검색창에 커서가 포커스를 잃었을 경우 리스트를 hide 검색창 둥글게 하기
     $("#searchText").blur(function (){

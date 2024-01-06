@@ -33,8 +33,11 @@ input:focus {
 }
 .searchLi {
     list-style: none;
-    padding: 20px;
-    background-color: #e2e3e5;
+    padding: 10px;
+    background-color: white;
+    border-width: 0px 1px 1px 1px;
+    border-style: solid;
+    border-color: black;
 }
 .link {
     color: inherit;
