@@ -8,6 +8,7 @@ spring:
     static-path-pattern: /static/**
   profiles:
     default: local
+    include: secret
   web:
     resources:
       static-locations:
