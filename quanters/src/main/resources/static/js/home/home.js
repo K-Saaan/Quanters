@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-    console.log("home.js")
     var realPath = location.href; // http://localhost:8080/member/show 같은 full URL
     var urlIndex = realPath.lastIndexOf("/");
     var usingUrl = realPath.substring(0, urlIndex); // full URL에서 http://localhost:8080/member 까지만 자른 URL
