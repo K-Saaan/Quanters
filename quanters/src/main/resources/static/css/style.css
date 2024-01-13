@@ -45,3 +45,19 @@ input:focus {
 a.link:hover {
     color: black;
 }
+.headerText {
+    font-family: cursive;
+    font-size: 70px;
+}
+.keyword {
+    font-size: 30px;
+}
+.predictResult {
+    font-size: 50px;
+    color: red;
+}
+.predictDiv {
+    flex-direction: column;
+    text-align: center;
+    margin-top: 20px;
+}
