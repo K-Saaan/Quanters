@@ -1,3 +1,7 @@
 <div class="d-flex justify-content-center" style="margin: 20px;">
-    <h1 class="headerText">Quanters</h1>
+    <div>
+        <a href="${pageContext.request.contextPath}/home/search">
+            <img src="${pageContext.request.contextPath}/static/image/logo.png" class="searchImage">
+        </a>
+    </div>
 </div>
