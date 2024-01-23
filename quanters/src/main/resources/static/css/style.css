@@ -27,9 +27,37 @@ input:focus {
 .autoComplete {
     width: 720px;
 }
+.outerDiv {
+    position: relative;
+    width: 60%;
+    margin: 0 auto;
+}
+.searchBarDiv {
+    position: absolute;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+}
+.searchUlDiv {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    top: 60px;
+    left: 0px;
+}
+.predictDiv {
+    flex-direction: column;
+    text-align: center;
+    margin-top: 20px;
+    position: absolute;
+    top: 120px;
+    left: 0px;
+    right: 0px;
+}
 .searchUl {
     width: 100%;
     padding: 0px;
+    position: relative;
 }
 .searchLi {
     list-style: none;
@@ -38,7 +66,9 @@ input:focus {
     border-width: 0px 1px 1px 1px;
     border-style: solid;
     border-color: black;
+    width: 100%;
 }
+
 .link {
     color: inherit;
 }
@@ -55,9 +85,4 @@ a.link:hover {
 .predictResult {
     font-size: 50px;
     color: red;
-}
-.predictDiv {
-    flex-direction: column;
-    text-align: center;
-    margin-top: 20px;
 }
