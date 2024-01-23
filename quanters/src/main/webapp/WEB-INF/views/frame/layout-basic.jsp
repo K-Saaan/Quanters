@@ -22,7 +22,7 @@
 </head>
 <body>
 <tiles:insertAttribute name="header"/>
-<div id="page-wrapper" style="padding-top: 60px;">
+<div id="page-wrapper" >
     <tiles:insertAttribute name="side"/>
     <div id="page-content-wrapper">
         <div class="container-fluid">
