@@ -28,28 +28,26 @@ public class S3Service {
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
 
-    public void getObject(String storedFileName) throws IOException {
+    public String getObject(String storedFileName, String stockName) throws IOException {
         S3Object o = amazonS3.getObject(new GetObjectRequest(bucket, storedFileName));
         S3ObjectInputStream objectInputStream = ((S3Object) o).getObjectContent();
-
-        // S3 bucket 파일 다운로드 ResponseEntity<byte[]> -> void
-//        byte[] bytes = IOUtils.toByteArray(objectInputStream);
-//        String fileName = URLEncoder.encode(storedFileName, "UTF-8").replaceAll("\\+", "%20");
-//        HttpHeaders httpHeaders = new HttpHeaders();
-//        httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-//        httpHeaders.setContentLength(bytes.length);
-//        httpHeaders.setContentDispositionFormData("attachment", fileName);
-//
-//        return new ResponseEntity<>(bytes, httpHeaders, HttpStatus.OK);
 
         BufferedReader br = null;
         br = new BufferedReader(new InputStreamReader(objectInputStream, "UTF-8"));
         String line;
+        String result = "";
         while ((line = br.readLine()) != null) {
             String[] data = line.split(",", 0);
             if (data != null) {
-                System.out.println(data[0] + data[1] + data[2]);
+                if(data[0].equals(stockName)) {
+                    if(data[1].equals("up")) {
+                        result = "up";
+                    } else {
+                        result = "down";
+                    }
+                }
             }
         }
+        return result;
     }
 }

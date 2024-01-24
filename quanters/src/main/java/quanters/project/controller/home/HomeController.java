@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import quanters.project.service.aws.S3Service;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import java.io.IOException;
 
@@ -24,10 +26,13 @@ public class HomeController {
     @GetMapping("/detail")
     public String searchDetail(@RequestParam(value = "keyword") String keyword, Model model) {
         model.addAttribute("keyword", keyword);
+        LocalDate now = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        String formatedNow = now.format(formatter);
+        String result = "";
         try {
-//            CsvParser csvParser = new CsvParser();
-//            csvParser.csvParser();
-            s3Service.getObject("test3.csv");
+            result = s3Service.getObject(formatedNow + ".csv", keyword);
+            model.addAttribute("result", result);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Exception e) {

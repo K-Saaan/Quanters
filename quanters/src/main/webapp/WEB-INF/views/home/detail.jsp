@@ -16,6 +16,6 @@
     </div>
     <div class="d-flex justify-content-center predictDiv">
         <p class="keyword">${keyword} 금일 주가 예측 결과 </p>
-        <p class="predictResult">상승</p>
+        <p class="predictResult">${result}</p>
     </div>
 </div>
