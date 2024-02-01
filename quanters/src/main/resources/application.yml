@@ -14,8 +14,8 @@ spring:
       static-locations:
         classpath:/static/
       add-mappings: true
-  devtools:
-    livereload:
-      enabled: true
-    restart:
-      enabled: true
+#  devtools:
+#    livereload:
+#      enabled: true
+#    restart:
+#      enabled: true
