@@ -30,14 +30,15 @@ public class HomeController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         String formatedNow = now.format(formatter);
         String result = "";
-        try {
-            result = s3Service.getObject(formatedNow + ".csv", keyword);
-            model.addAttribute("result", result);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            result = s3Service.getObject(formatedNow + ".csv", keyword);
+//            model.addAttribute("result", result);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+        model.addAttribute("result", result);
         return "home/detail";
     }
 }
