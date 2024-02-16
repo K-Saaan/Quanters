@@ -1,3 +1,18 @@
+@font-face {
+    font-family: 'GyeonggiTitleM';
+    src: url('../font/경기천년제목_Medium.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+body {
+    font-family: 'GyeonggiTitleM' !important;
+}
+
+.siteHeader {
+    margin: 20px;
+    height: 150px;
+}
+
 .searchBar {
     width: 720px;
     border: 1px solid black;
@@ -47,12 +62,15 @@ input:focus {
 }
 .predictDiv {
     flex-direction: column;
-    text-align: center;
-    margin-top: 20px;
     position: absolute;
     top: 120px;
     left: 0px;
     right: 0px;
+    border: 1px solid lightgrey;
+    border-radius: 30px;
+    padding: 20px;
+    width: 80%;
+    margin: 0 auto;
 }
 .searchUl {
     width: 100%;
@@ -81,6 +99,9 @@ a.link:hover {
 }
 .keyword {
     font-size: 30px;
+}
+.keywordStr {
+    font-size: 20px;
 }
 .predictResult {
     font-size: 50px;
