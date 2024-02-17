@@ -1,0 +1,61 @@
+2023-12-06 21:14:36 [scrapy.utils.log] INFO: Scrapy 2.11.0 started (bot: news_crawl)
+2023-12-06 21:14:36 [scrapy.utils.log] INFO: Versions: lxml 4.9.3.0, libxml2 2.9.13, cssselect 1.2.0, parsel 1.8.1, w3lib 2.1.2, Twisted 22.10.0, Python 3.9.16 (main, May 13 2023, 14:19:52) - [Clang 14.0.0 (clang-1400.0.29.202)], pyOpenSSL 23.3.0 (OpenSSL 3.1.4 24 Oct 2023), cryptography 41.0.7, Platform macOS-13.5.1-arm64-arm-64bit
+2023-12-06 21:14:36 [scrapy.addons] INFO: Enabled addons:
+[]
+2023-12-06 21:14:36 [asyncio] DEBUG: Using selector: KqueueSelector
+2023-12-06 21:14:36 [scrapy.utils.log] DEBUG: Using reactor: twisted.internet.asyncioreactor.AsyncioSelectorReactor
+2023-12-06 21:14:36 [scrapy.utils.log] DEBUG: Using asyncio event loop: asyncio.unix_events._UnixSelectorEventLoop
+2023-12-06 21:14:36 [scrapy.extensions.telnet] INFO: Telnet Password: 82fc520d8bc269d5
+2023-12-06 21:14:36 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.corestats.CoreStats',
+ 'scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.memusage.MemoryUsage',
+ 'scrapy.extensions.logstats.LogStats']
+2023-12-06 21:14:36 [scrapy.crawler] INFO: Overridden settings:
+{'BOT_NAME': 'news_crawl',
+ 'FEED_EXPORT_ENCODING': 'utf-8',
+ 'LOG_FILE': 'sklogfile.txt',
+ 'NEWSPIDER_MODULE': 'news_crawl.spiders',
+ 'REQUEST_FINGERPRINTER_IMPLEMENTATION': '2.7',
+ 'SPIDER_MODULES': ['news_crawl.spiders'],
+ 'TWISTED_REACTOR': 'twisted.internet.asyncioreactor.AsyncioSelectorReactor'}
+2023-12-06 21:14:36 [scrapy.middleware] INFO: Enabled downloader middlewares:
+['scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
+ 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+2023-12-06 21:14:36 [scrapy.middleware] INFO: Enabled spider middlewares:
+['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware']
+2023-12-06 21:14:36 [twisted] CRITICAL: Unhandled error in Deferred:
+2023-12-06 21:14:36 [twisted] CRITICAL: 
+Traceback (most recent call last):
+  File "/Users/gimsan/.pyenv/versions/3.9.16/lib/python3.9/site-packages/twisted/internet/defer.py", line 1697, in _inlineCallbacks
+    result = context.run(gen.send, result)
+  File "/Users/gimsan/.pyenv/versions/3.9.16/lib/python3.9/site-packages/scrapy/crawler.py", line 158, in crawl
+    self.engine = self._create_engine()
+  File "/Users/gimsan/.pyenv/versions/3.9.16/lib/python3.9/site-packages/scrapy/crawler.py", line 172, in _create_engine
+    return ExecutionEngine(self, lambda _: self.stop())
+  File "/Users/gimsan/.pyenv/versions/3.9.16/lib/python3.9/site-packages/scrapy/core/engine.py", line 100, in __init__
+    self.scraper = Scraper(crawler)
+  File "/Users/gimsan/.pyenv/versions/3.9.16/lib/python3.9/site-packages/scrapy/core/scraper.py", line 109, in __init__
+    self.itemproc: ItemPipelineManager = itemproc_cls.from_crawler(crawler)
+  File "/Users/gimsan/.pyenv/versions/3.9.16/lib/python3.9/site-packages/scrapy/middleware.py", line 90, in from_crawler
+    return cls.from_settings(crawler.settings, crawler)
+  File "/Users/gimsan/.pyenv/versions/3.9.16/lib/python3.9/site-packages/scrapy/middleware.py", line 67, in from_settings
+    mw = create_instance(mwcls, settings, crawler)
+  File "/Users/gimsan/.pyenv/versions/3.9.16/lib/python3.9/site-packages/scrapy/utils/misc.py", line 194, in create_instance
+    instance = objcls(*args, **kwargs)
+  File "/Users/gimsan/Desktop/project/뉴스데이터를 사용한 주가 예측/newCrawling/news_crawl/pipelines.py", line 50, in __init__
+    self.file = open('../../data/news/skNewsCrawl2.csv', 'wb')
+FileNotFoundError: [Errno 2] No such file or directory: '../../data/news/skNewsCrawl2.csv'
