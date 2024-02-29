@@ -44,7 +44,8 @@
   <img src="https://img.shields.io/badge/Notion-000000?style=flat&logo=Notion&logoColor=white"/></a>
 
 ##### 프로젝트 파이프라인
-  ![cicd_pipeline](https://github.com/kimdaehyuun/Quanters/assets/42797206/73ced394-2b42-4db4-88f2-36dcdf469b3c)
+  ![pipeline](https://github.com/kimdaehyuun/Quanters/assets/42797206/d51c0d10-1b9f-49da-9088-548cb20d48c7)
+
 
 
   
