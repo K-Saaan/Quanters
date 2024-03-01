@@ -48,7 +48,7 @@ class CsvPipeline(object):
         if spider_name == 'newsUrlCrawler':
             # path가 없으면 생성
             print('Start url item to csv >>>>>>>>>>>>>>>>')
-            path = f'/Users/gimsan/Documents/GitHub/Quanters/quanters_python/data/news/url_crawl/{yymm}'
+            path = f'/home/ubuntu/temp/quanters/data/news/url_crawl/{yymm}'
             # path = f'../../data/news/url_crawl/{yymm}'
             if not os.path.exists(path):
                 os.mkdir(path)
@@ -57,7 +57,7 @@ class CsvPipeline(object):
             self.exporter.start_exporting()
         elif spider_name == 'newsCrawler':
             print('Start text item to csv >>>>>>>>>>>>>>>>')
-            path = f'/Users/gimsan/Documents/GitHub/Quanters/quanters_python/data/news/text_crawl/{yymm}'
+            path = f'/home/ubuntu/temp/quanters/data/news/text_crawl/{yymm}'
             if not os.path.exists(path):
                 os.mkdir(path)
 
