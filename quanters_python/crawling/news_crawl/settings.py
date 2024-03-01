@@ -13,8 +13,10 @@ SPIDER_MODULES = ["news_crawl.spiders"]
 NEWSPIDER_MODULE = "news_crawl.spiders"
 LOG_LEVEL='DEBUG'
 
-# ITEM_PIPELINES = {'news_crawl.pipelines.CsvPipeline' : 300,}
-ITEM_PIPELINES = {'news_crawl.pipelines.NewsCsvPipeline' : 300,}
+# ITEM_PIPELINES = {'news_crawl.pipelines.CsvPipeline' : 300,
+#                   'news_crawl.pipelines.NewsCsvPipeline' : 500}
+
+ITEM_PIPELINES = {'news_crawl.pipelines.CsvPipeline' : 300}
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = "news_crawl (+http://www.yourdomain.com)"
@@ -91,6 +93,6 @@ ROBOTSTXT_OBEY = False
 #HTTPCACHE_STORAGE = "scrapy.extensions.httpcache.FilesystemCacheStorage"
 
 # Set settings whose default value is deprecated to a future-proof value
-REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
+# REQUEST_FINGERPRINTER_IMPLEMENTATION = "sha1"
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
