@@ -50,9 +50,9 @@ def run_crawl(spider_name):
     subprocess.run(["scrapy", "crawl", spider_name])
     print(f"Finished crawl for {spider_name}")
 
-# run_crawl('newsUrlCrawler')
-# time.sleep(60)
-# run_crawl('newsCrawler')
+run_crawl('newsUrlCrawler')
+time.sleep(60)
+run_crawl('newsCrawler')
 
 # 전날 폐장부터 오늘 개장 전까지의 뉴스를 감성분석 해 오늘의 주가 등하락을 예측
 # 학습 : 뉴스 감성분석 결과 + 전날 거래량 | 오늘 주가 결과
