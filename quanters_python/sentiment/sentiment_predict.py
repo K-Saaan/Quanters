@@ -15,7 +15,7 @@ import tensorflow_addons as tfa
 from transformers import BertTokenizer, TFBertForSequenceClassification
 
 # 모델과 tokenizer 선언
-model_path = '/Users/gimsan/Documents/GitHub/Quanters/quanters_python/model/sentiment_predict/best_model.h5'
+model_path = '/home/ubuntu/temp/quanters/model/sentiment_predict/best_model.h5'
 model = load_model(model_path, custom_objects={'TFBertForSequenceClassification': TFBertForSequenceClassification})
 tokenizer = BertTokenizer.from_pretrained("klue/bert-base")
 
