@@ -77,7 +77,6 @@ def is_first_day(now, holiday_day_list):
     return day_list
 
 # 지정한 해의 영업일과 휴일이 저장된 df 출력
-# working_day_df = pd.read_csv('../data/working_day/working_day.csv')
 working_day_df = pd.read_csv('/home/ubuntu/temp/quanters/data/working_day/working_day.csv')
 holiday_day_list = working_day_df.loc[working_day_df['working_day'] == 0, 'date'].to_list()
 

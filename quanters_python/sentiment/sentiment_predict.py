@@ -69,8 +69,6 @@ def sentiment_of_day(df, holiday_list):
     return sen_df
 
 def sentiment_predict(news_df, day_list, holiday_list):
-    # 전처리한 뉴스 데이터셋 불러오기
-    # news_df = pd.read_csv('./data/news/final_news_dataset.csv', index=False)
     logging.info('Start sentiment analysis >>>>>>>>>>> ')
     data_x = convert_data_x(news_df['text'])
 

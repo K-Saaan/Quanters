@@ -49,7 +49,6 @@ def combine_df(day_list):
         yyyymm = date[:6]
         dd = date[6:]
         # 파일 경로 생성
-        # filepath = f'./data/news/text_crawl/{yyyymm}/text_{dd}.csv'
         filepath = f'/home/ubuntu/temp/quanters/data/news/text_crawl/{yyyymm}/text_{dd}.csv'
         
         # CSV 파일 읽기
@@ -74,20 +73,10 @@ def data_preprocess(day_list):
         logging.error('combine df Error : ', e)
 
     # path에 있는 뉴스 크롤링 파일 열기
-    # path = './data/news/'
-    # kakao_news = pd.read_csv(path + 'kakaoNewsCrawl.csv') # 035720
-    # naver_news = pd.read_csv(path + 'naverNewsCrawl.csv') # 035420
-    # sk_news = pd.read_csv(path + 'skNewsCrawl.csv') # 000660
-    # samsung_news = pd.read_csv(path + 'newsCrawl.csv') # 005930
 
     # company를 기업 코드로 변경
-    # kakao_news['company'] = '035720'
-    # naver_news['company'] = '035420'
-    # sk_news['company'] = '000660'
-    # samsung_news['company'] = '005930'
 
     # 기업별 뉴스 크롤링 df를 병합하여 df_news에 저장한다.
-    # df_news = pd.concat([kakao_news, naver_news, sk_news,samsung_news])
     df_news['date'] = pd.to_datetime(df_news['date'])
 
     # 본문 내용 전처리
