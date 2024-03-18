@@ -38,14 +38,22 @@
   <img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=GitHub&logoColor=white"/></a> 
   <img src="https://img.shields.io/badge/Amazon EC2-FF9900?style=flat&logo=Amazon EC2&logoColor=white"/></a> 
   <img src="https://img.shields.io/badge/Amazon S3-569A31?style=flat&logo=Amazon S3&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Jenkins-D24939?style=flat&logo=Jenkins&logoColor=white"/></a> 
+  <img src="https://img.shields.io/badge/GCP-4285F4?style=flat&logo=googlecloud&logoColor=white"/></a> 
+  <img src="https://img.shields.io/badge/Jenkins-D24939?style=flat&logo=Jenkins&logoColor=white"/></a>
+  <img src="https://img.shields.io/badge/Filezilla-BF0000?style=flat&logo=filezilla&logoColor=white"/></a> 
 
 ##### 협업툴
   <img src="https://img.shields.io/badge/Notion-000000?style=flat&logo=Notion&logoColor=white"/></a>
 
 ##### 프로젝트 파이프라인
-  ![pipeline](https://github.com/kimdaehyuun/Quanters/assets/42797206/d51c0d10-1b9f-49da-9088-548cb20d48c7)
-
+  ![pipeline_3](https://github.com/kimdaehyuun/Quanters/assets/42797206/99d14914-afa9-4b58-b04f-510ef641d939)
+  - 로컬 환경의 IntelliJ에서 코드 개발
+  - Github로 commit & push
+  - AWS EC2 서버에 띄워져있는 Jenkins가 깃허브의 push로부터 webhook을 일으켜 빌드 유발
+  - EC2 서버에서 bootWar로 빌드 후 톰캣 서버 실행. 추후 사이트 접속 가능.
+  - 머신러닝은 GPU가 탑재되어있는 GCP 서버에서 수행되어야하므로 젠킨스에서 빌드 후 조치사항으로 GCP 서버에 깃허브 repository의 파이썬 소스 디렉토리만 전송
+  - GCP 서버에서는 파이썬 소스가 cron으로 수행되며 데이터 크롤링, 학습, 예측 작업을 거쳐서 그 날의 해당 주식 주가 예측 최종 결과파일을 AWS S3에 csv 파일 형태로 적재
+  - 사이트 UI에서는 해당 날짜의 예측 결과를 AWS S3로부터 parsing하여 화면에 예측 결과 표시
 
 
   
