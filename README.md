@@ -54,9 +54,9 @@
   <img src="https://img.shields.io/badge/Filezilla-BF0000?style=flat&logo=filezilla&logoColor=white"/></a> 
 
 ##### ML
-> BERT : KLUE-BERT(뉴스데이터를 pre-trained)
-> 형태소 분석기 : Mecab
-> Model : Autogluon
+> BERT : KLUE-BERT(뉴스데이터를 pre-trained) <br />
+> 형태소 분석기 : Mecab <br />
+> Model : Autogluon <br />
 
 ##### 협업툴
   <img src="https://img.shields.io/badge/Notion-000000?style=flat&logo=Notion&logoColor=white"/></a>
