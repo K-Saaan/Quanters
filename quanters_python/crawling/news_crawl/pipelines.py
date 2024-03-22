@@ -86,7 +86,7 @@ class CsvPipeline(object):
 # class NewsCsvPipeline(object):
 #     def __init__(self):
 #         print('Start text item to csv >>>>>>>>>>>>>>>>')
-#         path = f'/Users/gimsan/Documents/GitHub/Quanters/quanters_python/data/news/text_crawl/{yymm}'
+#         path = f'/Users/kdh/Documents/GitHub/Quanters/quanters_python/data/news/text_crawl/{yymm}'
 #         # path = f'./quanters_python/data/news/text_crawl/{yymm}'
 #         # path가 없으면 생성
 #         if not os.path.exists(path):
