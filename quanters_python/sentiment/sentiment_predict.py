@@ -15,7 +15,7 @@ import tensorflow_addons as tfa
 from transformers import BertTokenizer, TFBertForSequenceClassification
 
 # 모델과 tokenizer 선언
-model_path = '/home/ubuntu/temp/quanters/model/sentiment_predict/best_model.h5'
+model_path = '/home/gimsan/quanters/model/sentiment_predict/best_model.h5'
 model = load_model(model_path, custom_objects={'TFBertForSequenceClassification': TFBertForSequenceClassification})
 tokenizer = BertTokenizer.from_pretrained("klue/bert-base")
 
@@ -89,7 +89,7 @@ def sentiment_predict(news_df, day_list, holiday_list):
     sentiment_df = sentiment_of_day(news_df, holiday_list)
     logging.info('sentiment df columns : %s', sentiment_df.columns)
     sentiment_df['date'] = day_list[0]
-    sentiment_path = f'/home/ubuntu/temp/quanters/data/sentiment/{yyyymm}'
+    sentiment_path = f'/home/gimsan/quanters/data/sentiment/{yyyymm}'
     isPath(sentiment_path)
     sentiment_df.to_csv(f'{sentiment_path}/sentiment_df_{dd}.csv', index=False)
     logging.info('End sentiment analysis >>>>>>>>>>> ')

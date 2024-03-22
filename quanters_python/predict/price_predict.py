@@ -5,7 +5,7 @@ import logging
 from path_check import isPath
 import boto3
 import io
-from s3_connect import s3_connection
+from .s3_connect import s3_connection
 
 now  = datetime.now()
 yyyymm = now.strftime("%Y%m")
@@ -17,7 +17,7 @@ def save_file(df):
     print("s3 connected..")
 
     # S3에 업로드 할 로컬 파일 경로 (EC2)
-    local_file_path = f"/home/ubuntu/temp/{yyyymm}/result_{dd}.csv"
+    local_file_path = f"/home/gimsan/{yyyymm}/result_{dd}.csv"
     # 버킷명 (고정. 하드코딩)
     bucket_name = "quanter"
     # S3 업로드 파일 위치. 가장 루트 디렉토리는 / 이렇게 표시를 안하는듯.
@@ -27,7 +27,7 @@ def save_file(df):
     print("sftp put success..")
 
 
-# /home/ubuntu/temp/quanters/data/
+# /home/gimsan/quanters/data/
 def price_predict(sentiment_df, stock_df, yymm, dd):
     logging.info('Start price predict >>>>>>>>>>>>>>>>> ')
     # 감성분석 df와 주가 df를 불러온다.
@@ -50,7 +50,7 @@ def price_predict(sentiment_df, stock_df, yymm, dd):
     # TabularDataset으로 변경해준다.
     pred_set = TabularDataset(df[x_features])
     # 사전에 학습된 predictor를 불러온다.
-    predictor = TabularPredictor.load('/home/ubuntu/temp/quanters/model/price_predict/', require_py_version_match=False)
+    predictor = TabularPredictor.load('/home/gimsan/quanters/model/price_predict/', require_py_version_match=False)
     # 예측을 수행한다.
     pred = predictor.predict(pred_set)
     #예측 결과를 pred_df['label']에 저장한다.
@@ -59,7 +59,7 @@ def price_predict(sentiment_df, stock_df, yymm, dd):
     pred_df['company'] = pred_df['company'].replace(com_dict)
     logging.info('predict df info : %s', pred_df.info())
     logging.info('predict df head : %s', pred_df.head())
-    pred_path = f'/home/ubuntu/temp/quanters/data/predict/{yymm}'
+    pred_path = f'/home/gimsan/quanters/data/predict/{yymm}'
     isPath(pred_path)
     pred_df.to_csv(f'{pred_path}/result_{dd}.csv', index=False)
     try:
