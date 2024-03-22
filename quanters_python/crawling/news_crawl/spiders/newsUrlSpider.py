@@ -86,7 +86,7 @@ class NewsSpider(scrapy.Spider):
         except_out = 0
         # url 수집 파일 읽어오기
         
-        with open(f'/home/ubuntu/temp/quanters/data/news/url_crawl/{yymm}/url_{dd}.csv') as csvfile:
+        with open(f'/home/home/kdh/quanters/data/news/url_crawl/{yymm}/url_{dd}.csv') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 try:
