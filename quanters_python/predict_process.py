@@ -37,7 +37,7 @@ logger.addHandler(stream_handler)
 
 # log를 파일에 출력
 log_now = now.strftime("%Y%m%d%H%M%S")
-log_path = f'/home/gimsan/quanters/log/{yymm}'
+log_path = f'/home/kdh/quanters/log/{yymm}'
 isPath(log_path)
 file_handler = logging.FileHandler(f'{log_path}/{log_now}_process.log')
 file_handler.setFormatter(formatter)
@@ -77,7 +77,7 @@ def is_first_day(now, holiday_day_list):
     return day_list
 
 # 지정한 해의 영업일과 휴일이 저장된 df 출력
-working_day_df = pd.read_csv('/home/gimsan/quanters/data/working_day/working_day.csv')
+working_day_df = pd.read_csv('/home/kdh/quanters/data/working_day/working_day.csv')
 holiday_day_list = working_day_df.loc[working_day_df['working_day'] == 0, 'date'].to_list()
 
 
