@@ -49,7 +49,7 @@ def combine_df(day_list):
         yyyymm = date[:6]
         dd = date[6:]
         # 파일 경로 생성
-        filepath = f'/home/ubuntu/temp/quanters/data/news/text_crawl/{yyyymm}/text_{dd}.csv'
+        filepath = f'/home/kdh/quanters/data/news/text_crawl/{yyyymm}/text_{dd}.csv'
         
         # CSV 파일 읽기
         df = pd.read_csv(filepath)
@@ -85,7 +85,7 @@ def data_preprocess(day_list):
     day_list[-1].replace('-', '')
     yyyymm = day_list[-1].replace('-', '')[:6]
     dd = day_list[-1].replace('-', '')[6:]
-    news_path = f'/home/ubuntu/temp/quanters/data/process_data/news/{yyyymm}'
+    news_path = f'/home/kdh/quanters/data/process_data/news/{yyyymm}'
     # path가 없으면 생성
     isPath(news_path)
 
@@ -106,7 +106,7 @@ def data_preprocess(day_list):
     stock_df.reset_index(inplace=True)
     stock_df = stock_df.rename(columns={'Date':'date'})
     logging.info('stock df columns : %s', stock_df.columns)
-    stock_path = f'/home/ubuntu/temp/quanters/data/process_data/stock/{yyyymm}'
+    stock_path = f'/home/kdh/quanters/data/process_data/stock/{yyyymm}'
     isPath(stock_path)
 
     # 전처리한 주가 데이터 저장

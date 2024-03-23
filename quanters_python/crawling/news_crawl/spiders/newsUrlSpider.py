@@ -15,7 +15,7 @@ class NewsUrlSpider(scrapy.Spider):
     name = 'newsUrlCrawler'
 
     def start_requests(self):
-        page = 1
+        page = 10
         # 현재 날짜와 시간을 가져옵니다.
         now = datetime.now()
         except_out = 0
