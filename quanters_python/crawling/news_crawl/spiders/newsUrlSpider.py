@@ -10,6 +10,7 @@ from newspaper import Article
 from datetime import datetime
 import pandas as pd
 import os
+import random
 
 class NewsUrlSpider(scrapy.Spider):
     name = 'newsUrlCrawler'
@@ -69,7 +70,7 @@ class NewsUrlSpider(scrapy.Spider):
             item['title'] = title
             item['url'] = href
             
-            time.sleep(4)
+            time.sleep(random.uniform(3, 6))
                     
             yield item
 
@@ -118,7 +119,7 @@ class NewsSpider(scrapy.Spider):
         item['date'] = date
         item['text'] = text
 
-        time.sleep(5)
+        time.sleep(random.uniform(4, 8))
 
         yield item
 
