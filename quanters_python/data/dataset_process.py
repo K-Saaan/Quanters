@@ -60,7 +60,7 @@ def combine_df(day_list):
     # 데이터프레임 합치기
     combined_df = pd.concat(df_list, ignore_index=True)
 
-    logging.info('conbined_df head >>>>>>>>> : %s', combine_df.head())
+    logging.info('conbined_df head >>>>>>>>> : %s', combined_df.head())
 
     return combined_df
 
