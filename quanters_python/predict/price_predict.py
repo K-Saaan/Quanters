@@ -42,7 +42,7 @@ def price_predict(sentiment_df, stock_df, yymm, dd):
     logging.info('stock df type : %s', stock_df.info())
     sentiment_df['date'] = pd.to_datetime(sentiment_df['date'])
     
-    sentiment_df['date'] -= pd.Timedelta(days=1)
+    # sentiment_df['date'] -= pd.Timedelta(days=1)
     
     logging.info('sentiment df head : %s', sentiment_df.head())
     logging.info('stock df head : %s', stock_df.head())
