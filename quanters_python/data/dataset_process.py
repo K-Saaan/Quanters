@@ -60,7 +60,7 @@ def combine_df(day_list):
     # 데이터프레임 합치기
     combined_df = pd.concat(df_list, ignore_index=True)
 
-    logging.info('conbined_df head >>>>>>>>> : %s', {combine_df.head()})
+    logging.info('conbined_df head >>>>>>>>> : %s', combine_df.head())
 
     return combined_df
 
@@ -90,7 +90,7 @@ def data_preprocess(day_list):
     logging.info(f'Start combine_df')
     df_news = news_process(df_news)
     
-    logging.info('df_news head >>>>>>>>> : %s', {df_news.head()})
+    logging.info('df_news head >>>>>>>>> : %s', df_news.head())
 
     logging.info(f'End news process')
     
