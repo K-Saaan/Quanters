@@ -82,11 +82,11 @@ def sentiment_predict(news_df, day_list, holiday_list):
     # 가장 확률이 높은 감성을 반환
     text_pred = np.argmax(text_pred, axis=1)
 
-    logging.info('text_pred >>>>>>>>>>. : ', text_pred)
+    logging.info('text_pred >>>>>>>>>>. : %s', text_pred)
 
     # 'sentiment' 컬럼에 감성분석 결과 저장
     news_df['sentiment'] = text_pred
-    # logging.info('news_df columns : ', news_df.columns)
+    logging.info('news_df head : %s', news_df.head())
     
     news_df.set_index('date', inplace=True)
     news_df.sort_index(ascending=True, inplace=True)

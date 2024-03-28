@@ -87,7 +87,7 @@ def data_preprocess(day_list):
 
     # 본문 내용 전처리
     
-    logging.info(f'Start combine_df')
+    logging.info(f'Start news_process')
     df_news = news_process(df_news)
     
     logging.info('df_news head >>>>>>>>> : %s', df_news.head())
