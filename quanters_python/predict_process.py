@@ -37,7 +37,7 @@ logger.addHandler(stream_handler)
 
 # log를 파일에 출력
 log_now = now.strftime("%Y%m%d%H%M%S")
-log_path = f'/home/kdh/quanters/data/predict/{yymm}/result_{dd}.csv'
+log_path = f'/home/kdh/quanters/log/{yymm}'
 isPath(log_path)
 file_handler = logging.FileHandler(f'{log_path}/{log_now}_process.log')
 file_handler.setFormatter(formatter)
@@ -56,7 +56,7 @@ if not os.path.exists(crawl_file_path):
     time.sleep(60)
     run_crawl('newsCrawler')
 else:
-    logging.info('crawl file already exist >>>>>>>>>>>>>> ')
+    logging.info('crawl file already exsist')
 
 # 전날 폐장부터 오늘 개장 전까지의 뉴스를 감성분석 해 오늘의 주가 등하락을 예측
 # 학습 : 뉴스 감성분석 결과 + 전날 거래량 | 오늘 주가 결과

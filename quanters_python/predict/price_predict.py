@@ -17,7 +17,7 @@ def save_file(df):
     print("s3 connected..")
 
     # S3에 업로드 할 로컬 파일 경로 (EC2)
-    local_file_path = f"/home/kdh/{yyyymm}/result_{dd}.csv"
+    local_file_path = f"/home/kdh/quanters/data/predict/{yyyymm}/result_{dd}.csv"
     # 버킷명 (고정. 하드코딩)
     bucket_name = "quanter"
     # S3 업로드 파일 위치. 가장 루트 디렉토리는 / 이렇게 표시를 안하는듯.
@@ -61,9 +61,9 @@ def price_predict(sentiment_df, stock_df, yymm, dd):
     logging.info('predict df head : %s', pred_df.head())
     pred_path = f'/home/kdh/quanters/data/predict/{yymm}'
     isPath(pred_path)
-    pred_df.to_csv(f'{pred_path}/result_{dd}.csv', index=False)
     try:
         save_file(pred_df)
+        pred_df.to_csv(f'{pred_path}/result_{dd}.csv', index=False)
     except Exception as e:
         logging.error(f'Price predict save_file Error : {e}')
 
