@@ -67,7 +67,6 @@ def data_preprocess(day_list):
     logging.info(' Start data preprocess >>>>>>>>>> ')
 
     # day_list의 날짜에 있는 csv 파일을 가져와서 하나로 합친다.
-    print('=') * 30
     logging.info(f'Start combine_df')
     try:
         df_news = combine_df(day_list)
@@ -75,7 +74,7 @@ def data_preprocess(day_list):
         logging.error('combine df Error : ', e)
 
     logging.info(f'End combine_df')
-    print('=') * 30
+    
 
     # path에 있는 뉴스 크롤링 파일 열기
 
@@ -85,11 +84,11 @@ def data_preprocess(day_list):
     df_news['date'] = pd.to_datetime(df_news['date'])
 
     # 본문 내용 전처리
-    print('=') * 30
+    
     logging.info(f'Start combine_df')
     df_news = news_process(df_news)
     logging.info(f'End news process')
-    print('=') * 30
+    
 
 
     day_list[-1].replace('-', '')

@@ -71,11 +71,11 @@ def sentiment_of_day(df, holiday_list):
 def sentiment_predict(news_df, day_list, holiday_list):
     logging.info('Start sentiment analysis >>>>>>>>>>> ')
 
-    print('=') * 30
+    
     logging.info(f'Start convert data ')
     data_x = convert_data_x(news_df['text'])
     logging.info(f'End convert data ')
-    print('=') * 30
+    
 
     # 텍스트 감성분석 수행
     text_pred = model.predict(data_x)
