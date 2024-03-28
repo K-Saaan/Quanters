@@ -31,6 +31,8 @@ def save_file(df):
 def price_predict(sentiment_df, stock_df, yymm, dd):
     logging.info('Start price predict >>>>>>>>>>>>>>>>> ')
     # 감성분석 df와 주가 df를 불러온다.
+    logging.info('sentiment df head : %s', sentiment_df.head())
+    logging.info('stock df head : %s', stock_df.head())
 
     # predict()를 수행하기 위한 dataset을 만들기 위해 sentiment_df, stock_df를 병합한다.
     logging.info('sentiment df columns : %s', sentiment_df.columns)

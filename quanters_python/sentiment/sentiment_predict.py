@@ -81,6 +81,9 @@ def sentiment_predict(news_df, day_list, holiday_list):
     text_pred = model.predict(data_x)
     # 가장 확률이 높은 감성을 반환
     text_pred = np.argmax(text_pred, axis=1)
+
+    logging.info('text_pred >>>>>>>>>>. : ', text_pred)
+
     # 'sentiment' 컬럼에 감성분석 결과 저장
     news_df['sentiment'] = text_pred
     # logging.info('news_df columns : ', news_df.columns)
@@ -93,6 +96,7 @@ def sentiment_predict(news_df, day_list, holiday_list):
     dd = date[6:]
     sentiment_df = sentiment_of_day(news_df, holiday_list)
     logging.info('sentiment df columns : %s', sentiment_df.columns)
+    logging.info('sentiment df head : %s', sentiment_df.head())
     sentiment_df['date'] = day_list[0]
     sentiment_path = f'/home/kdh/quanters/data/sentiment/{yyyymm}'
     isPath(sentiment_path)
