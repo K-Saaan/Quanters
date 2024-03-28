@@ -43,8 +43,10 @@ def price_predict(sentiment_df, stock_df, yymm, dd):
     sentiment_df['date'] = pd.to_datetime(sentiment_df['date'])
     logging.info('sentiment df head : %s', sentiment_df.head())
     logging.info('stock df head : %s', stock_df.head())
-    df = pd.merge(sentiment_df, stock_df, left_on=['date', 'company'], right_on=['date', 'company'])
+    df = pd.merge(sentiment_df, stock_df, on=['date', 'company'], how='left')
     # predict()에 사용할 컬럼을 정의한다.
+    logging.info('predict 컬럼 정의 df head : %s', df.head())
+
     x_features = ['company', 'date', 'sentiment', 'Volume']
 
     pred_df = df[x_features]
