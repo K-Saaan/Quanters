@@ -41,6 +41,9 @@ def price_predict(sentiment_df, stock_df, yymm, dd):
     logging.info('sentiment df type : %s', sentiment_df.info())
     logging.info('stock df type : %s', stock_df.info())
     sentiment_df['date'] = pd.to_datetime(sentiment_df['date'])
+    
+    sentiment_df['date'] -= pd.Timedelta(days=1)
+    
     logging.info('sentiment df head : %s', sentiment_df.head())
     logging.info('stock df head : %s', stock_df.head())
     df = pd.merge(sentiment_df, stock_df, on=['date', 'company'], how='left')
