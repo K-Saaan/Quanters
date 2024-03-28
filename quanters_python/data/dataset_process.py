@@ -87,6 +87,9 @@ def data_preprocess(day_list):
     
     logging.info(f'Start combine_df')
     df_news = news_process(df_news)
+    
+    logging.info('df_news head >>>>>>>>> : %s', {df_news.head()})
+
     logging.info(f'End news process')
     
 

@@ -50,8 +50,9 @@ def run_crawl(spider_name):
     subprocess.run(["scrapy", "crawl", spider_name])
     print(f"Finished crawl for {spider_name}")
 
-crawl_file_path = f'/home/kdh/quanters/data/news/url_crawl/{yymm}/url_{dd}'
+crawl_file_path = f'/home/kdh/quanters/data/news/url_crawl/{yymm}/url_{dd}.csv'
 if not os.path.exists(crawl_file_path):
+    logging.info('crawl_file_path is already exist')
     run_crawl('newsUrlCrawler')
     time.sleep(60)
     run_crawl('newsCrawler')
