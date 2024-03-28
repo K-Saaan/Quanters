@@ -70,7 +70,9 @@ def sentiment_of_day(df, holiday_list):
 
 def sentiment_predict(news_df, day_list, holiday_list):
     logging.info('Start sentiment analysis >>>>>>>>>>> ')
-
+    
+    com_dict = {35720:'035720', 35420:'035420', 660:'000660', 5930:'005930'}
+    news_df['company'] = news_df['company'].replace(com_dict)
     
     logging.info(f'Start convert data ')
     data_x = convert_data_x(news_df['text'])
