@@ -29,17 +29,17 @@ public class HomeController {
         LocalDate now = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         String formatedNow = now.format(formatter);
+        String yyyyMM = formatedNow.substring(0,6);
+        String dd = formatedNow.substring(6);
         String result = "";
         try {
-//            result = s3Service.getObject(formatedNow + ".csv", keyword);
-            result = s3Service.getObject("20240124.csv", keyword);
+            result = s3Service.getObject(yyyyMM + "/result_" + dd + ".csv", keyword);
             model.addAttribute("result", result);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-//        model.addAttribute("result", result);
         return "home/detail";
     }
 }
