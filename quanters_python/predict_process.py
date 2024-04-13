@@ -88,9 +88,9 @@ holiday_day_list = working_day_df.loc[working_day_df['working_day'] == 0, 'date'
 
 day_list = is_first_day(now, holiday_day_list)
 
-if day_list != 0: # 영업일인 경우 수행
-    stock_df, df_news = data_preprocess(day_list)
-    sentiment_df = sentiment_predict(df_news, day_list, holiday_day_list)
-    price_predict(sentiment_df, stock_df, yymm, dd)
+# if day_list != 0: # 영업일인 경우 수행
+stock_df, df_news = data_preprocess(day_list)
+sentiment_df = sentiment_predict(df_news, day_list, holiday_day_list)
+price_predict(sentiment_df, stock_df, yymm, dd)
 
 
