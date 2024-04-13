@@ -69,13 +69,14 @@ else:
 def is_first_day(now, holiday_day_list):
     today = now.strftime("%Y-%m-%d")
     day_list = []
-    if today in holiday_day_list:
-        return 0
+
+    # if today in holiday_day_list:
+    #     return 0
     
     day_list = []
     day_list.append(today)
     pre_date = now - pd.Timedelta(days=1)
-    while pre_date in holiday_day_list:
+    while pre_date.strftime("%Y-%m-%d") in holiday_day_list:
         day_list.append(pre_date.strftime("%Y-%m-%d"))
         pre_date -= pd.Timedelta(days=1)
     day_list.append(pre_date.strftime("%Y-%m-%d"))
