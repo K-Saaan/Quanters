@@ -40,7 +40,7 @@ def price_predict(sentiment_df, stock_df, yymm, dd):
 
     logging.info('sentiment df type : %s', sentiment_df.info())
     logging.info('stock df type : %s', stock_df.info())
-    
+
     sentiment_df['date'] = pd.to_datetime(sentiment_df['date'])
     stock_df['date'] = pd.to_datetime(stock_df['date'])
     
@@ -69,8 +69,8 @@ def price_predict(sentiment_df, stock_df, yymm, dd):
     pred_path = f'/home/kdh/quanters/data/predict/{yymm}'
     isPath(pred_path)
     try:
-        save_file(pred_df)
         pred_df.to_csv(f'{pred_path}/result_{dd}.csv', index=False)
+        save_file(pred_df)
     except Exception as e:
         logging.error(f'Price predict save_file Error : {e}')
 
