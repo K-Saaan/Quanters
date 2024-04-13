@@ -67,7 +67,7 @@ def combine_df(day_list):
 
 def data_preprocess(day_list):
     logging.info(' Start data preprocess >>>>>>>>>> ')
-
+    logging.info(f'day_list : {day_list}')
     # day_list의 날짜에 있는 csv 파일을 가져와서 하나로 합친다.
     logging.info(f'Start combine_df')
     try:
@@ -110,6 +110,7 @@ def data_preprocess(day_list):
     stocks = ['035720', '035420', '000660', '005930']
     stock_data = []
     target_date = day_list[-1]
+    logging.info(f'target_date : {target_date}')
     for stock in stocks:
         data = fdr.DataReader(stock, start=target_date, end=target_date)
         data['company'] = stock
