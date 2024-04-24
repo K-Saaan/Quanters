@@ -100,7 +100,7 @@
 <br />
 
 #### 2. 주가 데이터 수집
-'''
+```python
 import pandas as pd
 import FinanceDataReader as fdr
 from datetime import datetime, timedelta
@@ -122,7 +122,8 @@ for k, v in stocks.items():
 stock_df = pd.concat(stock_data)
 stock_df.reset_index(inplace=True)
 stock_df = stock_df.rename(columns={'Date':'date'})
-'''
+
+```
 
 <img width="459" alt="스크린샷 2024-04-24 오후 8 48 37" src="https://github.com/kimdaehyuun/Quanters/assets/111870436/664724d0-661e-4805-aa90-aa724284f42b">
 
