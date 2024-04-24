@@ -1,32 +1,29 @@
 # Quanters
-### ML을 활용한 주식 투자 예측 시스템
-
+## ML을 활용한 주식 투자 예측 시스템
 <br />
 
-## 프로젝트 개요
-> Machine Learning 기술을 활용하여 주식 관련 뉴스 기사 데이터를 분석하여 특정 주식 종목의 주가 변동을 예측하는 시스템.<br />
-> Quant Investment(퀀트투자)란 일반적으로 투자자들이 산업과 기업을 분석해 가치를 매기는 정성적인 투자법과는 달리, 수학과 통계를 기반으로 전략을 만들고 이를 바탕으로 투자하는 정량적인 투자법을 의미합니다. <br />
-> 이에 ML 기술을 활용해 퀀트투자(Quant)를 하는 사람들(ers) 이라는 의미로 Quanters라는 프로젝트를 시작하게 되었습니다.<br />
-> 본 프로젝트는 [A study on Deep Learning-based Stock Price Prediction using News Sentiment Analysis], [뉴스와주가빅데이터감성분석을통한지능형투자의사결정모형] 두 논문을 참고해서 진행했습니다. 논문에서 뉴스와 주가 사이의 상관관계가 있다고 나와 참고하여 구현했습니다.<br />
-> 1차 형태 : 삼성전자, SK 하이닉스, 네이버, 카카오 4개의 주식 종목만 특정하여 해당 주가의 주가 상승/하락 여부만 판단하여 사용자에게 정보 제공하는 형태(추후 형태 발전 예정)
+## 팀원별 역할
+#### 🍔 김대현
+- UI
+	- Springboot + Java 환경을 통해 검색을 통해 해당 주가 예측 결과를 표시해주는 UI 구축
+- CI/CD
+	- AWS EC2 서버를 구축하여 젠킨스를 통해 Github commit시 Webhook을 유발하여 자동 배포 및 톰캣 서버 실행 자동화 설정
+	- AWS S3 스토리지 서버를 통해 주가 예측 결과 csv 파일이 적재되고 UI에서 parsing 하는 구조 구축
 
+#### ⛰️ 김산
+- Data crawling
+	- 뉴스 데이터
+	- 주가 데이터
+- Data EDA
+	- 뉴스 본문 전처리
+	- 뉴스와 주가 데이터를 병합하기 위한 전처리
+	- Feature selection
+- Modeling
+	- 뉴스 본문 감성분석
+	- 뉴스 데이터와 주가 데이터 병합
+	- 주가 데이터를 기반으로 labeling
+	- 주가 예측 모델링
 <br />
-
-## 프로젝트 소개
-> 프로젝트 주제 : ML를 활용한 주식 예측 분석 시스템<br />
-> 프로젝트 기간 : 2023.12.24~
-> 프로젝트 가정 : 전날 폐장 이후부터 당일 개장 전까지의 뉴스가 당일 개장 후 주가에 영향을 미친다는 가정을 했습니다.
-
-<br />
-
-## 프로젝트 작업순서
-1. 뉴스 데이터 수집
-2. 주가 데이터 수집
-3. 데이터 전처리
-4. 뉴스 본문 감성분석
-5. 일별 감성점수 계산
-6. 뉴스 데이터 + 거래량 데이터셋으로 주가의 상승/하락 labeling
-7. Predict
 
 ## Development_Skills
 
@@ -61,7 +58,77 @@
 ##### 협업툴
   <img src="https://img.shields.io/badge/Notion-000000?style=flat&logo=Notion&logoColor=white"/></a>
 
-##### 프로젝트 파이프라인
+<br />
+
+## 프로젝트 개요
+> Machine Learning 기술을 활용하여 주식 관련 뉴스 기사 데이터를 분석하여 특정 주식 종목의 주가 변동을 예측하는 시스템.<br />
+> Quant Investment(퀀트투자)란 일반적으로 투자자들이 산업과 기업을 분석해 가치를 매기는 정성적인 투자법과는 달리, 수학과 통계를 기반으로 전략을 만들고 이를 바탕으로 투자하는 정량적인 투자법을 의미합니다. <br />
+> 이에 ML 기술을 활용해 퀀트투자(Quant)를 하는 사람들(ers) 이라는 의미로 Quanters라는 프로젝트를 시작하게 되었습니다.<br />
+
+<br />
+
+## 참고
+> [A study on Deep Learning-based Stock Price Prediction using News Sentiment Analysis](https://koreascience.kr/article/JAKO202225752973104.page) <br />
+> [뉴스와 주가 빅데이터 감성분석을 통한 지능형 투자 의사결정 모형](https://www.dbpia.co.kr/pdf/pdfView.do?nodeId=NODE01901732&googleIPSandBox=false&mark=0&ipRange=false&b2cLoginYN=false&aiChatView=B&readTime=15-20&isPDFSizeAllowed=true&nodeHistoryTotalCnt=2&accessgl=Y&language=ko_KR&hasTopBanner=true)
+
+<br />
+
+## 프로젝트 소개
+> 프로젝트 주제 : 머신러닝을 활용한 뉴스테이터 분석 및 주가 예측 시스템<br />
+> 프로젝트 기간 : 2023.12.24~ <br />
+> 가설 : 전날 폐장 이후부터 당일 개장 전까지의 뉴스가 당일 개장 후 주가에 영향을 미친다.
+
+<br />
+
+## Version 1.0
+> 삼성전자, SK 하이닉스, 네이버, 카카오 4개의 주식 종목만 특정하여 해당 주가의 주가 상승/하락 여부만 판단하여 사용자에게 정보 제공하는 형태
+
+![quanters](https://github.com/kimdaehyuun/Quanters/assets/111870436/8d4972ef-922b-4b4a-9bdd-3a8e16e13e7c)
+
+<br />
+
+
+## 프로젝트 작업순서
+1. 뉴스 데이터 수집
+2. 주가 데이터 수집
+3. 데이터 전처리
+4. 뉴스 본문 감성분석
+5. 일별 감성점수 계산
+6. 데이터 통합
+7. modeling
+
+<br />
+
+#### 2. 주가 데이터 수집
+'''
+import pandas as pd
+import FinanceDataReader as fdr
+from datetime import datetime, timedelta
+
+# 수집할 시작-끝 날짜 선언
+start_date = datetime(2023, 1, 1)
+end_date = datetime(2023, 11, 30)
+
+# 수집할 기업 정의
+stocks = {'카카오':'035720', 'SK하이닉스':'000660', '네이버':'035420', '삼성전자':'005930'}
+
+stock_data = []
+for k, v in stocks.items():
+    data = fdr.DataReader(v, start=start_date, end=end_date)
+    data['company'] = k
+    # 기업별 data를 list에 저장
+    stock_data.append(data)
+# 데이터프레임 병합
+stock_df = pd.concat(stock_data)
+stock_df.reset_index(inplace=True)
+stock_df = stock_df.rename(columns={'Date':'date'})
+'''
+
+<img width="459" alt="스크린샷 2024-04-24 오후 8 48 37" src="https://github.com/kimdaehyuun/Quanters/assets/111870436/664724d0-661e-4805-aa90-aa724284f42b">
+
+
+
+## 프로젝트 파이프라인
   ![pipeline_3](https://github.com/kimdaehyuun/Quanters/assets/42797206/99d14914-afa9-4b58-b04f-510ef641d939)
   - 로컬 환경의 IntelliJ에서 코드 개발
   - Github로 commit & push
@@ -71,4 +138,12 @@
   - GCP 서버에서는 파이썬 소스가 cron으로 수행되며 데이터 크롤링, 학습, 예측 작업을 거쳐서 그 날의 해당 주식 주가 예측 최종 결과파일을 AWS S3에 csv 파일 형태로 적재
   - 사이트 UI에서는 해당 날짜의 예측 결과를 AWS S3로부터 parsing하여 화면에 예측 결과 표시
   
+</div>
+
+
+## 모델 구조
+
+![quanters_model_architect](https://github.com/kimdaehyuun/Quanters/assets/111870436/fa12da60-2019-4efc-852d-e6dae2dbb4f2)
+
+
 </div>
