@@ -99,33 +99,16 @@
 
 <br />
 
+#### 1. 뉴스 데이터 수집
+2023년 1월부터 11월까지의 기사 수집
+
+![news](https://github.com/kimdaehyuun/Quanters/assets/111870436/5f6ba644-3945-430d-940e-27cc4975a654)
+
+
 #### 2. 주가 데이터 수집
-```python
-import pandas as pd
-import FinanceDataReader as fdr
-from datetime import datetime, timedelta
+일별 주가 데이터, 로그 데이터, 로그 후 차분한 데이터 확인
 
-# 수집할 시작-끝 날짜 선언
-start_date = datetime(2023, 1, 1)
-end_date = datetime(2023, 11, 30)
-
-# 수집할 기업 정의
-stocks = {'카카오':'035720', 'SK하이닉스':'000660', '네이버':'035420', '삼성전자':'005930'}
-
-stock_data = []
-for k, v in stocks.items():
-    data = fdr.DataReader(v, start=start_date, end=end_date)
-    data['company'] = k
-    # 기업별 data를 list에 저장
-    stock_data.append(data)
-# 데이터프레임 병합
-stock_df = pd.concat(stock_data)
-stock_df.reset_index(inplace=True)
-stock_df = stock_df.rename(columns={'Date':'date'})
-
-```
-
-<img width="459" alt="스크린샷 2024-04-24 오후 8 48 37" src="https://github.com/kimdaehyuun/Quanters/assets/111870436/664724d0-661e-4805-aa90-aa724284f42b">
+![stock](https://github.com/kimdaehyuun/Quanters/assets/111870436/bdeb18d9-3482-41c1-a8c6-185be52f2e18)
 
 
 
