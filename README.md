@@ -111,6 +111,34 @@
 ![stock](https://github.com/kimdaehyuun/Quanters/assets/111870436/bdeb18d9-3482-41c1-a8c6-185be52f2e18)
 
 
+#### 3. 데이터 전처리
+- 뉴스 본문 불용어 제거
+
+- 기업별 기사 단어 빈도 확인 (삼성전자, SK하이닉스, 네이버, 카카오)
+
+<img width="119" alt="삼성전자 기사 빈도" src="https://github.com/kimdaehyuun/Quanters/assets/111870436/0eaa2c5c-6c08-4182-b5dc-1de04a77c079">
+<img width="119" alt="sk하이닉스 기사 빈도" src="https://github.com/kimdaehyuun/Quanters/assets/111870436/457dc6a0-9c61-44b8-901c-c3f618a8e8b8">
+<img width="109" alt="네이버 기사 빈도" src="https://github.com/kimdaehyuun/Quanters/assets/111870436/b30fec74-7047-43d8-a70c-10cd8f1048fd">
+<img width="112" alt="카카오 기사 빈도" src="https://github.com/kimdaehyuun/Quanters/assets/111870436/ff28fdbe-67a1-4ec6-b00a-6a2f8912befa">
+
+
+- SBERT를 이용한 기사 본문 키워드 추출
+
+```
+sbert = SentenceTransformer('jhgan/ko-sroberta-multitask')
+
+doc_emb = sbert.encode(df['article'])
+doc_idx = 0
+
+word_emb = sbert.encode(words)
+dists = cosine_distances(doc_emb[[doc_idx]], word_emb).flatten()
+for i in np.argsort(dists)[:10]:
+    print(words[i])
+
+```
+<img width="46" alt="스크린샷 2024-05-01 오후 5 12 31" src="https://github.com/kimdaehyuun/Quanters/assets/111870436/450a4510-917a-49f6-9fb1-50c6beaf8e40">
+
+
 
 ## 프로젝트 파이프라인
   ![pipeline_3](https://github.com/kimdaehyuun/Quanters/assets/42797206/99d14914-afa9-4b58-b04f-510ef641d939)
