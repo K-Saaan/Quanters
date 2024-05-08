@@ -138,6 +138,17 @@ for i in np.argsort(dists)[:10]:
 ```
 <img width="46" alt="스크린샷 2024-05-01 오후 5 12 31" src="https://github.com/kimdaehyuun/Quanters/assets/111870436/450a4510-917a-49f6-9fb1-50c6beaf8e40">
 
+#### 4. 뉴스 본문 감성분석
+- Model : klue
+- 금융기사 데이터셋으로 fine-tuning
+	- dataset size : 1967(긍/부정 데이터셋)
+##### fine-tuning 성능평가
+<img width="409" alt="스크린샷 2024-05-08 오후 1 59 05" src="https://github.com/kimdaehyuun/Quanters/assets/111870436/2f14487d-51a4-4ddf-925a-1a35326afb47">
+
+##### 기사 본문 sentiment predict 
+![output](https://github.com/kimdaehyuun/Quanters/assets/111870436/3aef63c9-ddef-4667-8d74-13d07f7ddd2e)
+
+
 
 
 ## 프로젝트 파이프라인
