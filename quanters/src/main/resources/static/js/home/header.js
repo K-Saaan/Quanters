@@ -4,11 +4,13 @@ document.addEventListener('DOMContentLoaded', function () {
     if(userId != "") {
         $("#loginButton").text("Logout")
         $("#loginHref").attr("href", "/login/logout")
+        $("#homepageHref").attr("href", "/home/search")
         $("#loginMenu1").show()
         $("#loginMenu3").show()
     } else {
         $("#loginButton").text("Login/Register")
         $("#loginHref").attr("href", "/login/loginPage")
+        $("#homepageHref").attr("href", "/home/home")
         $("#loginMenu1").hide()
         $("#loginMenu3").hide()
     }

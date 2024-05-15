@@ -1,7 +1,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/home/header.js"></script>
 <div class="d-flex justify-content-center siteHeader">
     <div>
-        <a href="${pageContext.request.contextPath}/home/search">
+        <a id="homepageHref" href="${pageContext.request.contextPath}/home/home">
             <img src="${pageContext.request.contextPath}/static/image/logo.png" class="searchImage">
         </a>
     </div>

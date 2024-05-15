@@ -1,26 +1,19 @@
 package quanters.project.controller.home;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import quanters.project.entity.HomeEntity;
-import quanters.project.repository.HomeRepository;
+import quanters.project.dto.login.PrincipalDetails;
 import quanters.project.service.aws.S3Service;
-import quanters.project.service.home.HomeService;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,17 +27,22 @@ public class HomeController {
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final S3Service s3Service;
-    private final HomeRepository homeRepository;
-    private final HomeService homeService;
 
+    @GetMapping("/home")
+    public String goHomePage(HttpServletRequest request, Model model) {
+        return "home/home";
+    }
     @GetMapping("/search")
-    public String showTestPage(HttpServletRequest request, Model model) {
+    public String goSearchPage(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession(true);
-        String userId = (String) session.getAttribute("userId");
-        if (userId != null) {
-            model.addAttribute("userId", userId);
+        Object principal = session.getAttribute("sessionUser");
+        if(principal instanceof PrincipalDetails) {
+            PrincipalDetails userDetails = (PrincipalDetails) principal;
+            String userId = userDetails.getUsername();
+            String authorities = userDetails.getAuthorities().toString();
             logger.info("userId &&&&&&&&&&&&&&&&&&&");
             logger.info(userId);
+            model.addAttribute("userId", userId);
         }
         return "home/search";
     }

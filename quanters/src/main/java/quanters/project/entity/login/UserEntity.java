@@ -21,4 +21,6 @@ public class UserEntity {
     private Timestamp createDate;
     @Column(name = "user_state")
     private String userState;
+    @Column(name = "role")
+    private String role;
 }

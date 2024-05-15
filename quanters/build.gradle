@@ -50,6 +50,9 @@ dependencies {
 //    providedCompile('org.apache.tomcat.embed:tomcat-embed-jasper:9.0.53')
     // postgre 연동
     implementation 'org.postgresql:postgresql:42.6.0'
+    // Spring Security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    testImplementation 'org.springframework.security:spring-security-test'
 }
 
 test {

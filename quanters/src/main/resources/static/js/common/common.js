@@ -36,6 +36,25 @@ function postajax(paramUrl, paramData, returnCallBack, uiType){
 		}
 	});
 }
+function loginPostajax(paramUrl, paramData, returnCallBack, uiType){
+	$.ajax({
+		url:	paramUrl,
+		method:	"POST",
+		type:	"POST",
+		data:	paramData,
+		dataType:	"json",
+		async:	true,
+		contentType:	"application/x-www-form-urlencoded; charset=utf-8",
+		cache:	false,
+		success:	function(returnData){
+			returnCallBack(returnData);
+		},
+		complete:	function(xhr, status){
+		},
+		error:	function(xhr, status, errorThrow){
+		}
+	})
+}
 
 
 /**

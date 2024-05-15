@@ -4,14 +4,14 @@
 <div class="d-flex justify-content-center">
     <div class="loginDiv">
         <main class="form-signin">
-            <form action="loginPage.jsp" method="post">
+            <form action="/login/loginAction" method="post" name="loginForm">
                 <div class="form-floating">
-                    <label for="id">ID</label>
-                    <input type="text" class="form-control" id="id" placeholder="아이디 입력...">
+                    <label for="username">ID</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="아이디 입력...">
                 </div>
                 <div class="form-floating" style="margin-top: 10px;">
-                    <label for="pwd">PW</label>
-                    <input type="password" class="form-control" id="pwd" placeholder="Password">
+                    <label for="password">PW</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                 </div>
                 <button type="button" class="btn btn-outline-dark loginBtn" id="loginBtn">로그인</button>
                 <button type="button" class="btn btn-outline-dark loginBtn" id="registerBtn">회원가입</button>
@@ -19,3 +19,4 @@
         </main>
     </div>
 </div>
+<p id="errorMessage" style="display: none">${errorMessage}</p>
