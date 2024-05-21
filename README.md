@@ -100,9 +100,9 @@
 <br />
 
 #### 1. 뉴스 데이터 수집
-2023년 1월부터 11월까지의 기사 수집
+2023년 1월부터 12월까지의 기사 수집
 
-![news](https://github.com/kimdaehyuun/Quanters/assets/111870436/5f6ba644-3945-430d-940e-27cc4975a654)
+![output](https://github.com/kimdaehyuun/Quanters/assets/111870436/422d7fdc-8da4-47eb-bb90-ad710aa9ee71)
 
 
 #### 2. 주가 데이터 수집
@@ -136,20 +136,26 @@ for i in np.argsort(dists)[:10]:
     print(words[i])
 
 ```
-<img width="46" alt="스크린샷 2024-05-01 오후 5 12 31" src="https://github.com/kimdaehyuun/Quanters/assets/111870436/450a4510-917a-49f6-9fb1-50c6beaf8e40">
+<img width="83" alt="스크린샷 2024-05-19 오후 5 43 01" src="https://github.com/kimdaehyuun/Quanters/assets/111870436/78f42f4f-add0-4503-a555-321409f4de9a">
+
 
 #### 4. 뉴스 본문 감성분석
-- Model : klue
+- Model : klue/bert-base
+	- KoBERT, KR-BERT, KoELECTRA, klue 비교 결과 성능이 가장 좋은 klue/bert-base 선택
 - 금융기사 데이터셋으로 fine-tuning
 	- dataset size : 1967(긍/부정 데이터셋)
 ##### fine-tuning 성능평가
-<img width="409" alt="스크린샷 2024-05-08 오후 1 59 05" src="https://github.com/kimdaehyuun/Quanters/assets/111870436/2f14487d-51a4-4ddf-925a-1a35326afb47">
+<img width="419" alt="스크린샷 2024-05-21 오전 9 49 31" src="https://github.com/kimdaehyuun/Quanters/assets/111870436/26d33ad5-036c-4f18-bf44-71e1351448d2">
+
 
 ##### 기사 본문 sentiment predict 
-![output](https://github.com/kimdaehyuun/Quanters/assets/111870436/3aef63c9-ddef-4667-8d74-13d07f7ddd2e)
+- 0 : 긍정 / 1 : 부정
+![sentiment](https://github.com/kimdaehyuun/Quanters/assets/111870436/df32f5f4-0453-4364-9b54-207af664c408)
 
+- 피어슨 검정
+<img width="313" alt="스크린샷 2024-05-21 오후 2 27 53" src="https://github.com/kimdaehyuun/Quanters/assets/111870436/3e9f4ae7-e121-42c1-84e8-101b54d7b130">
 
-
+> 뉴스 감성분석 결과와 주가 사이에 상관관계는 거의 없는 것으로 보임
 
 ## 프로젝트 파이프라인
   ![pipeline_3](https://github.com/kimdaehyuun/Quanters/assets/42797206/99d14914-afa9-4b58-b04f-510ef641d939)
