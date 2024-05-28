@@ -17,7 +17,7 @@ body {
     flex-direction: row-reverse;
     justify-content: flex-start;
     margin: 20px;
-    height: 120px;
+    height: 50px;
 }
 
 .siteMenu2 {
@@ -39,7 +39,37 @@ body {
     width: 30%;
     margin: 0 auto;
 }
-
+.myPageDiv {
+    width: 30%;
+    margin: 30px;
+}
+.gridTd {
+    padding: 10px;
+    border: 1px solid black;
+}
+.stockGrid {
+    margin: 20px;
+}
+.stockDiv {
+    display: flex;
+    justify-content: center;
+}
+#gridDiv2 {
+    margin-left: 40px;
+}
+#gridTable {
+    width: 150px;
+}
+#myGridTable {
+    width: 150px;
+    margin-left: 20px;
+}
+#gridDiv {
+    margin: 20px;
+}
+.chkBox {
+    margin: 10px;
+}
 .loginBtn {
     margin-top: 20px;
 }

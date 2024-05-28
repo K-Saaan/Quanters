@@ -10,11 +10,18 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+import quanters.project.dto.login.PrincipalDetails;
 import quanters.project.entity.login.UserEntity;
+import quanters.project.entity.stock.StockEntity;
 import quanters.project.repository.login.UserRepository;
+import quanters.project.repository.stock.StockRepository;
 import quanters.project.service.login.LoginService;
 
 @Controller // ResponseBody 필요없음
@@ -24,6 +31,7 @@ public class LoginController {
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final UserRepository userRepository;
+    private final StockRepository stockRepository;
     private final LoginService loginService;
 
     @GetMapping("/loginPage")
@@ -56,11 +64,31 @@ public class LoginController {
     }
 
     @GetMapping("/myPage")
-    public String goMyPage() {
+    public String goMyPage(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession(true);
+        Object principal = session.getAttribute("sessionUser");
+        if(principal instanceof PrincipalDetails) {
+            PrincipalDetails userDetails = (PrincipalDetails) principal;
+            String userId = userDetails.getUsername();
+            String authorities = userDetails.getAuthorities().toString();
+            model.addAttribute("userId", userId);
+        }
+        List<StockEntity> stockList = stockRepository.findAll();
+//        Map<String, Object> result = new HashMap();
+//        result.put("stockList", stockList.stream().map(StockEntity::getStockName).collect(Collectors.toList()));
+        model.addAttribute("stockList",stockList.stream().map(StockEntity::getStockName).collect(Collectors.toList()));
         return "login/myPage";
     }
     @GetMapping("/registerPage")
-    public String goRegisterPage() {
+    public String goRegisterPage(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession(true);
+        Object principal = session.getAttribute("sessionUser");
+        if(principal instanceof PrincipalDetails) {
+            PrincipalDetails userDetails = (PrincipalDetails) principal;
+            String userId = userDetails.getUsername();
+            String authorities = userDetails.getAuthorities().toString();
+            model.addAttribute("userId", userId);
+        }
         return "login/registerPage";
     }
 

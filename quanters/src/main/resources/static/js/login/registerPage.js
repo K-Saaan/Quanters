@@ -20,8 +20,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (returnData == 1) {
                     alert("등록이 완료됐습니다.");
                     window.location.href = "/home/search";
-                    // $("#couponSearch", opener.document).trigger("click");
-                    // window.close();
                 } else {
                     alert("register fail!");
                 }
