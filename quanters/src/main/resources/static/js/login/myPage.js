@@ -67,5 +67,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 $('#myGridTable').append("<tr><td class='gridTd'><input class='chkBox rightChk' type=\"checkbox\" value=" + value.stockName + ">" + value.stockName +"</td></tr>>")
             })
         })
+        $('.chkBox:checked').prop("checked", false)
     }
 });
