@@ -51,9 +51,10 @@
   <img src="https://img.shields.io/badge/Filezilla-BF0000?style=flat&logo=filezilla&logoColor=white"/></a> 
 
 ##### ML
-> BERT : KLUE-BERT(뉴스데이터를 pre-trained) <br />
-> 형태소 분석기 : Mecab <br />
-> Model : Autogluon <br />
+> 시각화 : matplotlib, seaborn
+> BERT : KLUE-BERT(뉴스데이터 pre-trained) <br />
+> 키워드 추출 : SBERT <br />
+> Model : XGBClassifier <br />
 
 ##### 협업툴
   <img src="https://img.shields.io/badge/Notion-000000?style=flat&logo=Notion&logoColor=white"/></a>
@@ -152,10 +153,35 @@ for i in np.argsort(dists)[:10]:
 - 0 : 긍정 / 1 : 부정
 ![sentiment](https://github.com/kimdaehyuun/Quanters/assets/111870436/df32f5f4-0453-4364-9b54-207af664c408)
 
+- 감성분석 결과와 종가 흐름 시각화
+<img width="800" alt="스크린샷 2024-05-28 오전 11 11 32" src="https://github.com/kimdaehyuun/Quanters/assets/111870436/322728e4-8564-448f-84cd-925c7822438b">
+
 - 피어슨 검정
 <img width="313" alt="스크린샷 2024-05-21 오후 2 27 53" src="https://github.com/kimdaehyuun/Quanters/assets/111870436/3e9f4ae7-e121-42c1-84e8-101b54d7b130">
 
 > 뉴스 감성분석 결과와 주가 사이에 상관관계는 거의 없는 것으로 보임
+
+##### 일별 감성점수 계산
+대상일 -1일 까지의 감성점수의 평균을 계산하고 Change를 사용해 1(하락),0(상승)으로 labeling 진행
+<img width="436" alt="스크린샷 2024-05-28 오전 11 44 01" src="https://github.com/kimdaehyuun/Quanters/assets/111870436/52874b26-d705-4e98-b7d0-3ef85e393904">
+
+
+##### modeling
+- modeling을 위한 최종 dataset
+<img width="439" alt="스크린샷 2024-05-28 오전 11 33 24" src="https://github.com/kimdaehyuun/Quanters/assets/111870436/b36db581-f492-4205-b4ab-2872fee67152">
+
+- 6개의 모델을 사용해서 ML 수행
+<img width="200" alt="스크린샷 2024-05-28 오전 11 46 58" src="https://github.com/kimdaehyuun/Quanters/assets/111870436/18d99517-2464-49be-b94c-f800a37bdee1">
+
+- Hyperparameter tuning
+사용라이브러리 : optuna
+대상 모델 : XGBClassifier, HistGradientBoostingClassifier
+
+XGBClassifier의 결과가 좋게 나와서 최종 모델로 선택
+
+- 최종 결과 Report
+<img width="600" alt="스크린샷 2024-05-28 오전 11 50 38" src="https://github.com/kimdaehyuun/Quanters/assets/111870436/bff1fef1-b213-4eca-bf9e-a87591bdb360">
+
 
 ## 프로젝트 파이프라인
   ![pipeline_3](https://github.com/kimdaehyuun/Quanters/assets/42797206/99d14914-afa9-4b58-b04f-510ef641d939)
