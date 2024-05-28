@@ -12,13 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import quanters.project.dto.login.PrincipalDetails;
 import quanters.project.entity.stock.UserStockEntity;
 import quanters.project.repository.stock.UserStockRepository;
+import quanters.project.service.stock.StockService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller // ResponseBody 필요없음
@@ -27,6 +25,7 @@ import java.util.stream.Collectors;
 public class StockController {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     private final UserStockRepository userStockRepository;
+    private final StockService stockService;
 
     @ResponseBody
     @PostMapping(value = "/insertUserStock", produces = "application/json;charset=utf-8")
@@ -86,5 +85,36 @@ public class StockController {
             result.put("stockList", "error");
         }
         return result;
+    }
+
+    @ResponseBody
+    @PostMapping(value = "/deleteUserStock", produces = "application/json;charset=utf-8")
+    public int deleteUserStock (@RequestBody Map<String, Object> param, HttpServletRequest request) throws Throwable {
+        int resultNum = 0;
+        try {
+            HttpSession session = request.getSession(true);
+            Object principal = session.getAttribute("sessionUser");
+            if(principal instanceof PrincipalDetails) {
+                PrincipalDetails userDetails = (PrincipalDetails) principal;
+                String userId = userDetails.getUsername();
+                // 파라미터로 받아온 이번에 추가할 주가 리스트
+                ArrayList<String> paramStockArr = (ArrayList<String>) param.get("stockName");
+                List<UUID> uuidArr = new ArrayList<>();
+                for (String paramStockName:paramStockArr) {
+                    List<UserStockEntity> existStockList = userStockRepository.findByUserIdAndStockName(userId, paramStockName);
+                    for (UserStockEntity userStockEntity:existStockList) {
+                        uuidArr.add(userStockEntity.getId());
+                    }
+                }
+                resultNum = stockService.deleteUserStock(uuidArr);
+                return resultNum;
+            } else {
+                return resultNum;
+            }
+        } catch (Exception e) {
+            logger.info("Error");
+            logger.error(String.valueOf(e));
+            return resultNum;
+        }
     }
 }

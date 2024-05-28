@@ -49,20 +49,26 @@ body {
 }
 .stockGrid {
     margin: 20px;
+    width: 180px;
 }
 .stockDiv {
     display: flex;
     justify-content: center;
 }
+.btnGridZone {
+    width: 180px;
+    display: flex;
+    justify-content: center;
+    margin: 0px 20px;
+}
 #gridDiv2 {
     margin-left: 40px;
 }
 #gridTable {
-    width: 150px;
+    width: 100%;
 }
 #myGridTable {
-    width: 150px;
-    margin-left: 20px;
+    width: 100%;
 }
 #gridDiv {
     margin: 20px;

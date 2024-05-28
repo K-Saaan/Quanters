@@ -9,4 +9,5 @@ import java.util.UUID;
 
 public interface UserStockRepository extends JpaRepository<UserStockEntity, UUID>, JpaSpecificationExecutor<UserStockEntity> {
     List<UserStockEntity> findByUserId(String userId);
+    List<UserStockEntity> findByUserIdAndStockName(String userId, String stockName);
 }
