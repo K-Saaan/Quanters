@@ -7,11 +7,13 @@
     <link type="text/css" href="${pageContext.request.contextPath}/static/css/bootstrap.css" rel="stylesheet" />
     <link type="text/css" href="${pageContext.request.contextPath}/static/css/bootstrap.min.css" rel="stylesheet" />
     <link type="text/css" href="${pageContext.request.contextPath}/static/css/style.css" rel="stylesheet" />
+<%--    <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />--%>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
     <script src="//code.jquery.com/jquery.min.js"></script>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> <!-- datepicker 용도 -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> <!-- datepicker 용도 -->
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
+<%--    <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>--%>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/common/bootstrap.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/common/bootstrap.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/common/common.js"></script>

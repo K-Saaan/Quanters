@@ -20,7 +20,6 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
         HttpSession session = request.getSession(true);
         session.removeAttribute("sessionUser");
         session.setAttribute("sessionUser", authentication.getPrincipal());
-        logger.info("Login 성공@@@@@@@@@@@@@@@@@@@@@@@");
         response.sendRedirect("/home/search");
     }
 }

@@ -30,8 +30,16 @@ public class HomeController {
 
     @GetMapping("/home")
     public String goHomePage(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession(true);
+        Object principal = session.getAttribute("sessionUser");
+        if(principal instanceof PrincipalDetails) {
+            PrincipalDetails userDetails = (PrincipalDetails) principal;
+            String userId = userDetails.getUsername();
+            String authorities = userDetails.getAuthorities().toString();
+        }
         return "home/home";
     }
+
     @GetMapping("/search")
     public String goSearchPage(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession(true);
@@ -40,15 +48,21 @@ public class HomeController {
             PrincipalDetails userDetails = (PrincipalDetails) principal;
             String userId = userDetails.getUsername();
             String authorities = userDetails.getAuthorities().toString();
-            logger.info("userId &&&&&&&&&&&&&&&&&&&");
-            logger.info(userId);
             model.addAttribute("userId", userId);
         }
         return "home/search";
     }
 
     @GetMapping("/detail")
-    public String searchDetail(@RequestParam(value = "keyword") String keyword, Model model) {
+    public String searchDetail(@RequestParam(value = "keyword") String keyword, Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession(true);
+        Object principal = session.getAttribute("sessionUser");
+        if(principal instanceof PrincipalDetails) {
+            PrincipalDetails userDetails = (PrincipalDetails) principal;
+            String userId = userDetails.getUsername();
+            String authorities = userDetails.getAuthorities().toString();
+            model.addAttribute("userId", userId);
+        }
         model.addAttribute("keyword", keyword);
         LocalDate now = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
