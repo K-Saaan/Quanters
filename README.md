@@ -150,7 +150,7 @@ for i in np.argsort(dists)[:10]:
 
 
 ##### 기사 본문 sentiment predict 
-- 0 : 긍정 / 1 : 부정
+- 1 : 긍정 / 0 : 부정
 ![sentiment](https://github.com/kimdaehyuun/Quanters/assets/111870436/df32f5f4-0453-4364-9b54-207af664c408)
 
 - 감성분석 결과와 종가 흐름 시각화
