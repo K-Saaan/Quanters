@@ -8,16 +8,30 @@ import urllib.request
 from path_check import isPath
 import logging
 
+import torch
 import tensorflow as tf
 from keras.models import load_model
 import tensorflow_addons as tfa
 # from tensorflow.keras.models import load_model
-from transformers import BertTokenizer, TFBertForSequenceClassification
+from transformers import BertTokenizer, TFBertForSequenceClassification, AdamW
+
+def load_model(model_path):
+    # 모델 전체 불러오기
+    model_file_path = os.path.join(model_path, 'bert_model.pt')
+    model = torch.load(model_file_path)
+    # 상태 사전만 불러오기 (필요한 경우)
+    state_dict_path = os.path.join(model_path, 'bert_model_state_dict.pt')
+    model_state_dict = torch.load(state_dict_path)
+    model.load_state_dict(model_state_dict)
+    return model
 
 # 모델과 tokenizer 선언
-model_path = '/home/kdh/quanters/model/sentiment_predict/best_model.h5'
-model = load_model(model_path, custom_objects={'TFBertForSequenceClassification': TFBertForSequenceClassification})
-tokenizer = BertTokenizer.from_pretrained("klue/bert-base")
+# model_path = '/home/kdh/quanters/model/sentiment_predict/best_model.h5'
+MODEL_NAME = "klue/bert-base"
+model_path = '/home/kdh/quanters/model/sentiment_predict'
+model = load_model(model_path)
+optimizer = AdamW(model.parameters(), lr=5e-5)
+tokenizer = BertTokenizer.from_pretrained(MODEL_NAME)
 
 # 텍스트를 학습 가능한 데이터로 변환
 def convert_data_x(X_data):

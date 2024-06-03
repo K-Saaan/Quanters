@@ -5,6 +5,7 @@ import logging
 from path_check import isPath
 import boto3
 import io
+import pickle
 from .s3_connect import s3_connection
 
 now  = datetime.now()
@@ -54,12 +55,16 @@ def price_predict(sentiment_df, stock_df, yymm, dd):
 
     pred_df = df[x_features]
     logging.info('predict df head : %s', pred_df.head())
-    # TabularDataset으로 변경해준다.
-    pred_set = TabularDataset(df[x_features])
-    # 사전에 학습된 predictor를 불러온다.
-    predictor = TabularPredictor.load('/home/kdh/quanters/model/price_predict/', require_py_version_match=False)
+
+    # 모델 파일 경로
+    model_path = '/home/kdh/quanters/model/price_predict/best_model.pkl'
+
+    # 저장된 모델 불러오기
+    with open(model_path, 'rb') as file:
+        loaded_model = pickle.load(file)
+
     # 예측을 수행한다.
-    pred = predictor.predict(pred_set)
+    pred = loaded_model.predict(pred_df)
     #예측 결과를 pred_df['label']에 저장한다.
     pred_df['label'] = pred
     com_dict = {35720:'035720', 35420:'035420', 660:'000660', 5930:'005930'}
