@@ -2,11 +2,10 @@ from typing import Iterable
 import scrapy
 import time
 import csv
-
+from newspaper import Article
 from scrapy.http import Request
 # from news_crawl.items import NewsCrawlItem, UrlCrawlItem
 from ..items import NewsCrawlItem, UrlCrawlItem
-from newspaper import Article
 from datetime import datetime
 import pandas as pd
 import os
