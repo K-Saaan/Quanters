@@ -4,7 +4,7 @@ import time
 import csv
 
 from scrapy.http import Request
-# from news_crawl.items import NewsCrawlItem, UrlCrawlItem
+from news_crawl.items import NewsCrawlItem, UrlCrawlItem
 from ..items import NewsCrawlItem, UrlCrawlItem
 from newspaper import Article
 from datetime import datetime
