@@ -7,6 +7,7 @@ from tqdm import tqdm
 import urllib.request
 from path_check import isPath
 import logging
+import platform
 
 import torch
 import tensorflow as tf
@@ -15,10 +16,18 @@ import tensorflow_addons as tfa
 # from tensorflow.keras.models import load_model
 from transformers import BertTokenizer, TFBertForSequenceClassification, AdamW
 
+os_name = platform.system()
+if os_name == 'Darwin' :  # MacOS 
+    device = torch.device('mps' if torch.backends.mps.is_available() else 'cpu')
+elif os_name == 'Windows' :
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+else :
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
 def load_model(model_path):
     # 모델 전체 불러오기
     model_file_path = os.path.join(model_path, 'bert_model.pt')
-    model = torch.load(model_file_path)
+    model = torch.load(model_file_path, map_location=device)
     # 상태 사전만 불러오기 (필요한 경우)
     state_dict_path = os.path.join(model_path, 'bert_model_state_dict.pt')
     model_state_dict = torch.load(state_dict_path)
@@ -32,37 +41,6 @@ model_path = '/home/kdh/quanters/model/sentiment_predict'
 model = load_model(model_path)
 optimizer = AdamW(model.parameters(), lr=5e-5)
 tokenizer = BertTokenizer.from_pretrained(MODEL_NAME)
-
-# 텍스트를 학습 가능한 데이터로 변환
-def convert_data_x(X_data):
-
-    # 입력 데이터(문장) 길이 제한
-    MAX_SEQ_LEN = 128
-    
-    # BERT 입력으로 들어가는 token, mask, segment, target 저장용 리스트
-    tokens, masks, segments= [], [], []
-    
-    for  X in tqdm(X_data):
-        # token: 입력 문장 토큰화
-        token = tokenizer.encode(X, truncation = True, padding = 'max_length', max_length = MAX_SEQ_LEN)
-        
-        # Mask: 토큰화한 문장 내 패딩이 아닌 경우 1, 패딩인 경우 0으로 초기화
-        num_zeros = token.count(0)
-        mask = [1] * (MAX_SEQ_LEN - num_zeros) + [0] * num_zeros
-        
-        # segment: 문장 전후관계 구분: 오직 한 문장이므로 모두 0으로 초기화
-        segment = [0]*MAX_SEQ_LEN
-
-        tokens.append(token)
-        masks.append(mask)
-        segments.append(segment)
-
-    # numpy array로 저장
-    tokens = np.array(tokens)
-    masks = np.array(masks)
-    segments = np.array(segments)
-
-    return [tokens, masks, segments]
 
 # 기업별 감성분석 점수의 평균을 구한다.
 def sentiment_of_day(df, holiday_list):
@@ -82,26 +60,35 @@ def sentiment_of_day(df, holiday_list):
 
     return sen_df
 
+
+def predict(model, tokenizer, text, device=device):
+    """
+    불러온 모델을 사용하여 텍스트 데이터에 대한 예측을 수행하는 함수
+    """
+    model.eval()  # 모델을 평가 모드로 설정
+    model.to(device)
+    
+    inputs = tokenizer(text, return_tensors="pt", padding=True, truncation=True, max_length=512).to(device)
+    
+    with torch.no_grad():
+        outputs = model(**inputs)
+        logits = outputs.logits
+    
+    pred = torch.sigmoid(logits)
+    predictions = torch.argmax(pred, dim=-1)
+
+    return predictions.item()
+
+
 def sentiment_predict(news_df, day_list, holiday_list):
     logging.info('Start sentiment analysis >>>>>>>>>>> ')
     
     com_dict = {35720:'035720', 35420:'035420', 660:'000660', 5930:'005930'}
     news_df['company'] = news_df['company'].replace(com_dict)
     
-    logging.info(f'Start convert data ')
-    data_x = convert_data_x(news_df['text'])
-    logging.info(f'End convert data ')
+    news_df['sentiment'] = news_df['text'].progress_apply(lambda x: predict(model, tokenizer, x, device))
     
-
-    # 텍스트 감성분석 수행
-    text_pred = model.predict(data_x)
-    # 가장 확률이 높은 감성을 반환
-    text_pred = np.argmax(text_pred, axis=1)
-
-    logging.info('text_pred >>>>>>>>>>. : %s', text_pred)
-
-    # 'sentiment' 컬럼에 감성분석 결과 저장
-    news_df['sentiment'] = text_pred
+    # 'sentiment' 결과 확인
     logging.info('news_df head : %s', news_df.head())
     
     news_df.set_index('date', inplace=True)
