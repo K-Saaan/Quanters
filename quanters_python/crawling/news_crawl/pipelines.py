@@ -51,7 +51,7 @@ class CsvPipeline(object):
             path = f'/home/kdh/quanters/data/news/url_crawl/{yymm}'
             # path = f'../../data/news/url_crawl/{yymm}'
             if not os.path.exists(path):
-                os.mkdir(path)
+                os.makedirs(path)
             self.file = open(f'{path}/url_{dd}.csv', 'wb')
             self.exporter = CsvItemExporter(self.file, encoding='utf-8')
             self.exporter.start_exporting()
@@ -59,7 +59,7 @@ class CsvPipeline(object):
             print('Start text item to csv >>>>>>>>>>>>>>>>')
             path = f'/home/kdh/quanters/data/news/text_crawl/{yymm}'
             if not os.path.exists(path):
-                os.mkdir(path)
+                os.makedirs(path)
 
             self.file = open(f'{path}/text_{dd}.csv', 'wb')
             self.exporter = CsvItemExporter(self.file, encoding='utf-8')
