@@ -30,7 +30,7 @@ def load_model(model_path):
     model = torch.load(model_file_path, map_location=device)
     # 상태 사전만 불러오기 (필요한 경우)
     state_dict_path = os.path.join(model_path, 'bert_model_state_dict.pt')
-    model_state_dict = torch.load(state_dict_path)
+    model_state_dict = torch.load(state_dict_path, map_location=device)
     model.load_state_dict(model_state_dict)
     return model
 
