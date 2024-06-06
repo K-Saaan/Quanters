@@ -91,7 +91,8 @@ def sentiment_predict(news_df, day_list, holiday_list):
 
     com_dict = {35720:'035720', 35420:'035420', 660:'000660', 5930:'005930'}
     news_df['company'] = news_df['company'].replace(com_dict)
-    news_df['sentiment'] = news_df['text'].apply(lambda x: predict(model, tokenizer, x, device))
+    news_df.dropna(axis=0, inplace=True)
+    news_df['sentiment'] = news_df['text'].progress_apply(lambda x: predict(model, tokenizer, x, device))
     
     # 'sentiment' 결과 확인
     logging.info('news_df head : %s', news_df.head())
