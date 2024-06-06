@@ -1,6 +1,6 @@
 import pandas as pd
 from datetime import datetime
-from autogluon.tabular import TabularDataset, TabularPredictor
+# from autogluon.tabular import TabularDataset, TabularPredictor
 import logging
 from path_check import isPath
 import boto3

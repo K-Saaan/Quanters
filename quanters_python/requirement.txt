@@ -6,8 +6,8 @@ keras==2.15.0
 newspaper3k==0.2.8
 numpy
 pandas
-tensorflow==2.14.0
-tensorflow-addons==0.23.0
+tensorflow
+tensorflow-addons
 transformers
 tqdm
 Scrapy
