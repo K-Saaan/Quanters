@@ -74,8 +74,6 @@ public class LoginController {
             model.addAttribute("userId", userId);
         }
         List<StockEntity> stockList = stockRepository.findAll();
-//        Map<String, Object> result = new HashMap();
-//        result.put("stockList", stockList.stream().map(StockEntity::getStockName).collect(Collectors.toList()));
         model.addAttribute("stockList",stockList.stream().map(StockEntity::getStockName).collect(Collectors.toList()));
         return "login/myPage";
     }

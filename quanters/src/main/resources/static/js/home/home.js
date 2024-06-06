@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
         }
-        // 기존에 이미 만들어진 li가 있는 경우 // jenkins test
+        // 기존에 이미 만들어진 li가 있는 경우
         else {
             // 검색어와 일치하는 목록이 있다면 해당하는 목록만 출력
             if(matchDataList.length != 0) {

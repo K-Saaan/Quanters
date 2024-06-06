@@ -64,9 +64,14 @@ document.addEventListener('DOMContentLoaded', function () {
             var myStockInfo = returnData.stockList;
             $('#myGridTable').empty()
             myStockInfo.forEach(function (value) {
-                $('#myGridTable').append("<tr><td class='gridTd'><input class='chkBox rightChk' type=\"checkbox\" value=" + value.stockName + ">" + value.stockName +"</td></tr>>")
+                $('#myGridTable').append("<tr><td class='gridTd'><input class='chkBox rightChk' type=\"checkbox\" value=" + value.stockName + "><a href='#' class='link'> " + value.stockName + "</a></td></tr>")
             })
         })
         $('.chkBox:checked').prop("checked", false)
     }
+
+    $(document).on('click', ".gridTd a", function (){
+        var keyword = $(this).text()
+        window.location.href = "/home/detail?keyword=" + keyword;
+    })
 });
