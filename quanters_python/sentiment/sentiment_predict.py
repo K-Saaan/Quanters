@@ -29,6 +29,8 @@ elif os_name == 'Windows' :
 else :
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
+print(f'device : {device}')
+
 def load_model(model_path):
     # 모델 전체 불러오기
     model_file_path = os.path.join(model_path, 'bert_model.pt')
