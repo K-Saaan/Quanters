@@ -17,7 +17,7 @@ import tensorflow as tf
 from keras.models import load_model
 import tensorflow_addons as tfa
 # from tensorflow.keras.models import load_model
-from transformers import BertTokenizer, TFBertForSequenceClassification, AdamW
+from transformers import BertTokenizer, TFBertForSequenceClassification, AdamW, BertModel
 
 tqdm.pandas()
 
@@ -31,14 +31,19 @@ else :
 
 print(f'device : {device}')
 
+# def load_model(model_path):
+#     # 모델 전체 불러오기
+#     model_file_path = os.path.join(model_path, 'bert_model.pt')
+#     model = torch.load(model_file_path, map_location=device)
+#     # 상태 사전만 불러오기 (필요한 경우)
+#     state_dict_path = os.path.join(model_path, 'bert_model_state_dict.pt')
+#     model_state_dict = torch.load(state_dict_path, map_location=device)
+#     model.load_state_dict(model_state_dict)
+#     return model
+
 def load_model(model_path):
-    # 모델 전체 불러오기
     model_file_path = os.path.join(model_path, 'bert_model.pt')
-    model = torch.load(model_file_path, map_location=device)
-    # 상태 사전만 불러오기 (필요한 경우)
-    state_dict_path = os.path.join(model_path, 'bert_model_state_dict.pt')
-    model_state_dict = torch.load(state_dict_path, map_location=device)
-    model.load_state_dict(model_state_dict)
+    model = BertModel.from_pretrained(model_file_path, map_location=device)
     return model
 
 # 모델과 tokenizer 선언
