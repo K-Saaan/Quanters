@@ -16,6 +16,8 @@ import tensorflow_addons as tfa
 # from tensorflow.keras.models import load_model
 from transformers import BertTokenizer, TFBertForSequenceClassification, AdamW
 
+tqdm.pandas()
+
 os_name = platform.system()
 if os_name == 'Darwin' :  # MacOS 
     device = torch.device('mps' if torch.backends.mps.is_available() else 'cpu')
