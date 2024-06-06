@@ -1,3 +1,6 @@
+import warnings
+warnings.filterwarnings('ignore')
+
 import pandas as pd
 from datetime import datetime
 # from autogluon.tabular import TabularDataset, TabularPredictor

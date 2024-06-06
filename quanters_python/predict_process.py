@@ -1,3 +1,6 @@
+import warnings
+warnings.filterwarnings('ignore')
+
 import os
 from datetime import datetime, date, timedelta
 import subprocess
