@@ -9,6 +9,7 @@ from path_check import isPath
 import boto3
 import io
 import pickle
+import joblib
 from .s3_connect import s3_connection
 
 now  = datetime.now()
@@ -67,9 +68,9 @@ def price_predict(sentiment_df, stock_df, yymm, dd):
     # 모델 파일 경로
     model_path = '/home/kdh/quanters/model/price_predict/best_model.pkl'
     # 저장된 모델 불러오기
-    with open(model_path, 'rb') as file:
-        loaded_model = pickle.load(file)
-
+    # with open(model_path, 'rb') as file:
+    #     loaded_model = pickle.load(file)
+    loaded_model = joblib.load(model_path)
     # 예측을 수행한다.
     pred = loaded_model.predict(pred_df)
     #예측 결과를 pred_df['label']에 저장한다.
