@@ -19,8 +19,6 @@ import tensorflow_addons as tfa
 # from tensorflow.keras.models import load_model
 from transformers import BertTokenizer, TFBertForSequenceClassification, AdamW, BertModel
 
-tqdm.pandas()
-
 os_name = platform.system()
 if os_name == 'Darwin' :  # MacOS 
     device = torch.device('mps' if torch.backends.mps.is_available() else 'cpu')
@@ -29,22 +27,20 @@ elif os_name == 'Windows' :
 else :
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-print(f'device : {device}')
+def load_model(model_path):
+    # 모델 전체 불러오기
+    model_file_path = os.path.join(model_path, 'bert_model.pt')
+    model = torch.load(model_file_path, map_location=device)
+    # 상태 사전만 불러오기 (필요한 경우)
+    state_dict_path = os.path.join(model_path, 'bert_model_state_dict.pt')
+    model_state_dict = torch.load(state_dict_path, map_location=device)
+    model.load_state_dict(model_state_dict)
+    return model
 
 # def load_model(model_path):
-#     # 모델 전체 불러오기
 #     model_file_path = os.path.join(model_path, 'bert_model.pt')
-#     model = torch.load(model_file_path, map_location=device)
-#     # 상태 사전만 불러오기 (필요한 경우)
-#     state_dict_path = os.path.join(model_path, 'bert_model_state_dict.pt')
-#     model_state_dict = torch.load(state_dict_path, map_location=device)
-#     model.load_state_dict(model_state_dict)
+#     model = BertModel.from_pretrained(model_file_path, map_location=device)
 #     return model
-
-def load_model(model_path):
-    model_file_path = os.path.join(model_path, 'bert_model.pt')
-    model = BertModel.from_pretrained(model_file_path, map_location=device)
-    return model
 
 # 모델과 tokenizer 선언
 # model_path = '/home/kdh/quanters/model/sentiment_predict/best_model.h5'
@@ -95,10 +91,12 @@ def predict(model, tokenizer, text, device=device):
 def sentiment_predict(news_df, day_list, holiday_list):
     logging.info('Start sentiment analysis >>>>>>>>>>> ')
     logging.info('news_df head : %s', news_df.head())
+    print(f'device : {device}')
 
     com_dict = {35720:'035720', 35420:'035420', 660:'000660', 5930:'005930'}
     news_df['company'] = news_df['company'].replace(com_dict)
     news_df.dropna(axis=0, inplace=True)
+    tqdm.pandas()
     news_df['sentiment'] = news_df['text'].progress_apply(lambda x: predict(model, tokenizer, x, device))
     
     # 'sentiment' 결과 확인
