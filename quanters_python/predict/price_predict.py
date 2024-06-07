@@ -54,7 +54,7 @@ def price_predict(sentiment_df, stock_df, yymm, dd):
     df = pd.merge(sentiment_df, stock_df, on=['date', 'company'], how='left')
     # predict()에 사용할 컬럼을 정의한다.
     logging.info('predict 컬럼 정의 df head : %s', df.head())
-    df['company'] = df['company'].map({'카카오':0, 'SK하이닉스':1, '네이버':2, '삼성전자':3})
+    df['company'] = df['company'].map({'035720':0, '000660':1, '035420':2, '005930':3})
     df['date'] = pd.to_datetime(df['date'])
     df['month'] = df['date'].dt.month
     df['day'] = df['date'].dt.day
