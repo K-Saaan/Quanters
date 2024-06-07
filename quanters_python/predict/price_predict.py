@@ -3,7 +3,7 @@ warnings.filterwarnings('ignore')
 
 import pandas as pd
 from datetime import datetime
-# from autogluon.tabular import TabularDataset, TabularPredictor
+import xgboost as xgb
 import logging
 from path_check import isPath
 import boto3
@@ -68,7 +68,8 @@ def price_predict(sentiment_df, stock_df, yymm, dd):
         loaded_model = pickle.load(file)
 
     # 예측을 수행한다.
-    pred = loaded_model.predict(pred_df)
+    dmatrix = xgb.DMatrix(pred_df)
+    pred = loaded_model.predict(dmatrix)
     #예측 결과를 pred_df['label']에 저장한다.
     pred_df['label'] = pred
     com_dict = {35720:'035720', 35420:'035420', 660:'000660', 5930:'005930'}
