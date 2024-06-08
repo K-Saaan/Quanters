@@ -41,13 +41,13 @@ public class S3Service {
 
             String stockCode = "";
             if(stockName.equals("카카오")) {
-                stockCode = "035720";
+                stockCode = "0";
             } else if(stockName.equals("네이버")) {
-                stockCode = "035420";
+                stockCode = "2";
             } else if(stockName.equals("SK하이닉스")) {
-                stockCode = "000660";
+                stockCode = "1";
             } else if(stockName.equals("삼성전자")) {
-                stockCode = "005930";
+                stockCode = "3";
             }
 
             BufferedReader br = null;
@@ -58,7 +58,7 @@ public class S3Service {
                 String[] data = line.split(",", 0);
                 if (data != null) {
                     if(data[0].equals(stockCode)) {
-                        if(data[4].equals("1")) {
+                        if(data[6].equals("1")) {
                             result = "up";
                         } else {
                             result = "down";

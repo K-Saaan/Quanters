@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import quanters.project.dto.login.PrincipalDetails;
+import quanters.project.entity.stock.StockEntity;
 import quanters.project.entity.stock.UserStockEntity;
+import quanters.project.repository.stock.StockRepository;
 import quanters.project.repository.stock.UserStockRepository;
 import quanters.project.service.stock.StockService;
 
@@ -24,9 +26,24 @@ import java.util.stream.Collectors;
 @RequestMapping("/stock")
 public class StockController {
     Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final StockRepository stockRepository;
     private final UserStockRepository userStockRepository;
     private final StockService stockService;
 
+    @ResponseBody
+    @PostMapping(value = "/showAllStock", produces = "application/json;charset=utf-8")
+    public Map<String, Object> showAllStock (@RequestBody Map<String, Object> param, HttpServletRequest request) throws Throwable {
+        HttpSession session = request.getSession(true);
+        Map<String, Object> result = new HashMap();
+        Object principal = session.getAttribute("sessionUser");
+        if(principal instanceof PrincipalDetails) {
+            PrincipalDetails userDetails = (PrincipalDetails) principal;
+            String userId = userDetails.getUsername();
+            List<StockEntity> stockList = stockRepository.findAll();
+            result.put("stockList", stockList);
+        }
+        return result;
+    }
     @ResponseBody
     @PostMapping(value = "/insertUserStock", produces = "application/json;charset=utf-8")
     public int insertUserStock (@RequestBody Map<String, Object> param, HttpServletRequest request) throws Throwable {

@@ -8,20 +8,92 @@ document.addEventListener('DOMContentLoaded', function () {
         stockCodeArr[index] = value.trim()
     })
 
-    for(const element in stockCodeArr) {
-        $('#gridTable').append("<tr><td class='gridTd'><input class='chkBox leftChk' type=\"checkbox\" value=" + stockCodeArr[element] + ">" + stockCodeArr[element] +"</td></tr>>")
-    }
+    // 메인그리드를 그리기 위한 사전 설정
+    const container = document.getElementById('stockGrid');
+    const provider = new RealGrid.LocalDataProvider(false);
+    const gridView = new RealGrid.GridView(container);
+    // 서브그리드를 그리기 위한 사전 설정
+    const subcontainer = document.getElementById('stockGrid2');
+    const subprovider = new RealGrid.LocalDataProvider(false);
+    const subgridView = new RealGrid.GridView(subcontainer);
+
+    gridView.setDataSource(provider);
+    gridView.setEditOptions({editable : false}); // 더블클릭시 그리드 셀 수정 불가능하게 설정
+    gridView.displayOptions.fitStyle = "fill";
+    subgridView.setDataSource(subprovider);
+    subgridView.setEditOptions({editable : false}); // 더블클릭시 그리드 셀 수정 불가능하게 설정
+    subgridView.displayOptions.fitStyle = "fill";
+
+    // 메인그리드 컬럼
+    provider.setFields([
+        {
+            fieldName: "stockCode",
+            dataType: "text",
+        },
+        {
+            fieldName: "stockName",
+            dataType: "text",
+        },
+    ]);
+
+    gridView.setColumns([
+        {
+            name: "stockCode",
+            fieldName: "stockCode",
+            type: "data",
+            width: "120",
+            header: {
+                text: "주가코드",
+            },
+        },
+        {
+            name: "stockName",
+            fieldName: "stockName",
+            type: "data",
+            width: "120",
+            header: {
+                text: "주가명",
+            },
+        },
+    ]);
+
+    // 서브그리드 컬럼
+    subprovider.setFields([
+        {
+            fieldName: "stockName",
+            dataType: "text",
+        },
+    ]);
+
+    subgridView.setColumns([
+        {
+            name: "stockName",
+            fieldName: "stockName",
+            type: "data",
+            width: "120",
+            header: {
+                text: "주가명",
+            },
+        },
+    ]);
+
+    postajax("/stock/showAllStock", {}, function(returnData){
+        var detailData = returnData.stockList;
+        provider.fillJsonData(detailData, { fillMode : "set"});
+    })
+
     showMyStockInfo();
 
     // 추가 동작
     $('#gridBtn').click(function () {
+        var chkArr = gridView.getCheckedRows();
         var reply = confirm("등록 하시겠습니까?");
         if(reply) {
-            const chkArr = $('.leftChk:checked')
             var resultArr = []
-            chkArr.each(function () {
-                resultArr.push($(this).val())
-            })
+            for(var i in chkArr) {
+                var chkStock = provider.getJsonRow(chkArr[i]);
+                resultArr.push(chkStock.stockName)
+            }
             var param = {
                 stockName: resultArr
             };
@@ -38,13 +110,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // 삭제 동작
     $('#gridBtn2').click(function () {
+        var chkArr = subgridView.getCheckedRows();
         var reply = confirm("삭제 하시겠습니까?");
         if(reply) {
-            const chkArr = $('.rightChk:checked')
             var resultArr = []
-            chkArr.each(function () {
-                resultArr.push($(this).val())
-            })
+            for(var i in chkArr) {
+                var chkStock = subprovider.getJsonRow(chkArr[i]);
+                resultArr.push(chkStock.stockName)
+            }
             var param = {
                 stockName: resultArr
             };
@@ -62,16 +135,9 @@ document.addEventListener('DOMContentLoaded', function () {
     function showMyStockInfo() {
         postajax("/stock/showUserStock", {}, function (returnData) {
             var myStockInfo = returnData.stockList;
-            $('#myGridTable').empty()
-            myStockInfo.forEach(function (value) {
-                $('#myGridTable').append("<tr><td class='gridTd'><input class='chkBox rightChk' type=\"checkbox\" value=" + value.stockName + "><a href='#' class='link'> " + value.stockName + "</a></td></tr>")
-            })
+            // var detailData = returnData.stockList;
+            subprovider.fillJsonData(myStockInfo, { fillMode : "set"});
         })
-        $('.chkBox:checked').prop("checked", false)
     }
 
-    $(document).on('click', ".gridTd a", function (){
-        var keyword = $(this).text()
-        window.location.href = "/home/detail?keyword=" + keyword;
-    })
 });
