@@ -68,15 +68,14 @@ def price_predict(sentiment_df, stock_df, yymm, dd):
     # 모델 파일 경로
     model_path = '/home/kdh/quanters/model/price_predict/best_model.pkl'
     # 저장된 모델 불러오기
-    # with open(model_path, 'rb') as file:
-    #     loaded_model = pickle.load(file)
     loaded_model = joblib.load(model_path)
+    
     # 예측을 수행한다.
     pred = loaded_model.predict(pred_df)
+    
     #예측 결과를 pred_df['label']에 저장한다.
     pred_df['label'] = pred
-    com_dict = {35720:'035720', 35420:'035420', 660:'000660', 5930:'005930'}
-    pred_df['company'] = pred_df['company'].replace(com_dict)
+    pred_df['company'] = pred_df['company'].map({0:'카카오', 1:'SK하이닉스' , 2:'네이버' , 3:'삼성전자'})
     logging.info('predict df info : %s', pred_df.info())
     logging.info('predict df head : %s', pred_df.head())
     pred_path = f'/home/kdh/quanters/data/predict/{yymm}'
