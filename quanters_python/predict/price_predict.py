@@ -61,7 +61,7 @@ def price_predict(sentiment_df, stock_df, yymm, dd):
     df['day'] = df['date'].dt.day
     df['dayOfWeek'] = df['date'].dt.day_of_week
 
-    x_features = ['company', 'Volume', 'sentiment', 'dayOfWeek', 'month', 'day']
+    x_features = ['company', 'Volume', 'sentiment', 'month', 'day', 'dayOfWeek']
     pred_df = df[x_features]
     logging.info('predict df head : %s', pred_df.head())
 

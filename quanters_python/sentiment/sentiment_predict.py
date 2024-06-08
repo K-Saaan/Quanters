@@ -30,10 +30,10 @@ else :
 def load_model(model_path):
     # 모델 전체 불러오기
     model_file_path = os.path.join(model_path, 'bert_model.pt')
-    model = torch.load(model_file_path, map_location=device)
+    model = torch.load(model_file_path)
     # 상태 사전만 불러오기 (필요한 경우)
     state_dict_path = os.path.join(model_path, 'bert_model_state_dict.pt')
-    model_state_dict = torch.load(state_dict_path, map_location=device)
+    model_state_dict = torch.load(state_dict_path)
     model.load_state_dict(model_state_dict)
     return model
 
@@ -59,11 +59,11 @@ def sentiment_of_day(df, holiday_list):
     for com in company_list:
         df_company = df[df['company'] == com]
         
-        sentiment_list.append(round(df_company['sentiment'].mean(), 3))
+        sentiment_list.append(round(df_company['predicted_average'].mean(), 3))
         com_list.append(com)
 
     df1 = pd.DataFrame(com_list, columns=['company'])
-    df2 = pd.DataFrame(sentiment_list, columns=['sentiment'])
+    df2 = pd.DataFrame(sentiment_list, columns=['predicted_average'])
     sen_df = pd.concat([df1, df2], axis=1)
 
     return sen_df
@@ -97,7 +97,7 @@ def sentiment_predict(news_df, day_list, holiday_list):
     news_df['company'] = news_df['company'].replace(com_dict)
     news_df.dropna(axis=0, inplace=True)
     tqdm.pandas()
-    news_df['sentiment'] = news_df['text'].progress_apply(lambda x: predict(model, tokenizer, x, device))
+    news_df['predicted_average'] = news_df['text'].progress_apply(lambda x: predict(model, tokenizer, x, device))
     
     # 'sentiment' 결과 확인
     logging.info('news_df head : %s', news_df.head())
