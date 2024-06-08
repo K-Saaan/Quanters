@@ -135,7 +135,6 @@ document.addEventListener('DOMContentLoaded', function () {
     function showMyStockInfo() {
         postajax("/stock/showUserStock", {}, function (returnData) {
             var myStockInfo = returnData.stockList;
-            // var detailData = returnData.stockList;
             subprovider.fillJsonData(myStockInfo, { fillMode : "set"});
         })
     }
