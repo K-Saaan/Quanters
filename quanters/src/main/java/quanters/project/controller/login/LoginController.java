@@ -65,16 +65,14 @@ public class LoginController {
 
     @GetMapping("/myPage")
     public String goMyPage(HttpServletRequest request, Model model) {
-//        HttpSession session = request.getSession(true);
-//        Object principal = session.getAttribute("sessionUser");
-//        if(principal instanceof PrincipalDetails) {
-//            PrincipalDetails userDetails = (PrincipalDetails) principal;
-//            String userId = userDetails.getUsername();
-//            String authorities = userDetails.getAuthorities().toString();
-//            model.addAttribute("userId", userId);
-//        }
-//        List<StockEntity> stockList = stockRepository.findAll();
-//        model.addAttribute("stockList",stockList.stream().map(StockEntity::getStockName).collect(Collectors.toList()));
+        HttpSession session = request.getSession(true);
+        Object principal = session.getAttribute("sessionUser");
+        if(principal instanceof PrincipalDetails) {
+            PrincipalDetails userDetails = (PrincipalDetails) principal;
+            String userId = userDetails.getUsername();
+            String authorities = userDetails.getAuthorities().toString();
+            model.addAttribute("userId", userId);
+        }
         return "login/myPage";
     }
     @GetMapping("/registerPage")

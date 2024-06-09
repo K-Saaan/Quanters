@@ -53,6 +53,8 @@ dependencies {
     // Spring Security
     implementation 'org.springframework.boot:spring-boot-starter-security'
     testImplementation 'org.springframework.security:spring-security-test'
+    // Web socket
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-websocket'
 }
 
 test {

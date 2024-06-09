@@ -70,21 +70,6 @@ public class HomeController {
         String yyyyMM = formatedNow.substring(0,6);
         String dd = formatedNow.substring(6);
         String result = "";
-
-//        Specification<HomeEntity> spec = ((root, query, criteriaBuilder) -> null);
-//        Map<String, Object> test = new HashMap();
-//        String testName = "brokurly";
-//        spec = spec.and(homeService.getByTestName(testName));
-//        int pagingIndex = 0;
-//        int pagingRows = 50;
-//        PageRequest page = PageRequest.of(pagingIndex, pagingRows);
-//        Page<HomeEntity> specHome = homeRepository.findAll(spec, page);
-//        test.put("codeList", specHome);
-//        logger.info("TEST%%%%%%%%%%%%%%%%%");
-//        for(HomeEntity home : specHome) {
-//            System.out.println( home.getTestName() );
-//        }
-
         try {
             result = s3Service.getObject(yyyyMM + "/result_" + dd + ".csv", keyword);
             model.addAttribute("result", result);
