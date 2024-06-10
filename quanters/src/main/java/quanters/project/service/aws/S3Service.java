@@ -39,16 +39,16 @@ public class S3Service {
             S3Object o = amazonS3.getObject(new GetObjectRequest(bucket, storedFileName));
             S3ObjectInputStream objectInputStream = ((S3Object) o).getObjectContent();
 
-            String stockCode = "";
-            if(stockName.equals("카카오")) {
-                stockCode = "0";
-            } else if(stockName.equals("네이버")) {
-                stockCode = "2";
-            } else if(stockName.equals("SK하이닉스")) {
-                stockCode = "1";
-            } else if(stockName.equals("삼성전자")) {
-                stockCode = "3";
-            }
+//            String stockCode = "";
+//            if(stockName.equals("카카오")) {
+//                stockCode = "0";
+//            } else if(stockName.equals("네이버")) {
+//                stockCode = "2";
+//            } else if(stockName.equals("SK하이닉스")) {
+//                stockCode = "1";
+//            } else if(stockName.equals("삼성전자")) {
+//                stockCode = "3";
+//            }
 
             BufferedReader br = null;
             br = new BufferedReader(new InputStreamReader(objectInputStream, "UTF-8"));
@@ -57,7 +57,7 @@ public class S3Service {
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",", 0);
                 if (data != null) {
-                    if(data[0].equals(stockCode)) {
+                    if(data[0].equals(stockName)) {
                         if(data[6].equals("1")) {
                             result = "up";
                         } else {
