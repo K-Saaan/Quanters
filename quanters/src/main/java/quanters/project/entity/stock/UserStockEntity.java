@@ -18,6 +18,8 @@ public class UserStockEntity {
     private UUID id;
     @Column(name = "user_id")
     private String userId;
+    @Column(name = "stock_code")
+    private String stockCode;
     @Column(name = "stock_name")
     private String stockName;
 }

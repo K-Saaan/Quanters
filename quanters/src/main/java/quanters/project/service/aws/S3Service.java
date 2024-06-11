@@ -39,17 +39,6 @@ public class S3Service {
             S3Object o = amazonS3.getObject(new GetObjectRequest(bucket, storedFileName));
             S3ObjectInputStream objectInputStream = ((S3Object) o).getObjectContent();
 
-//            String stockCode = "";
-//            if(stockName.equals("카카오")) {
-//                stockCode = "0";
-//            } else if(stockName.equals("네이버")) {
-//                stockCode = "2";
-//            } else if(stockName.equals("SK하이닉스")) {
-//                stockCode = "1";
-//            } else if(stockName.equals("삼성전자")) {
-//                stockCode = "3";
-//            }
-
             BufferedReader br = null;
             br = new BufferedReader(new InputStreamReader(objectInputStream, "UTF-8"));
             String line;

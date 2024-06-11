@@ -21,5 +21,21 @@
     </div>
     <div>
         <div><h3 class="stockTitle">현재 주가 현황</h3></div>
+        <div class="stockGrid3" id="stockGrid3">
+        </div>
+    </div>
+</div>
+<div class="d-flex justify-content-start" id="gridDiv3">
+    <div>
+        <div class="stockTitle"><h3>해당 주가 예측</h3></div>
+        <div class="predictGrid">
+            <img src="${pageContext.request.contextPath}/static/image/up.png" class="searchImage" id="upImage">
+            <img src="${pageContext.request.contextPath}/static/image/down.png" class="searchImage" id="downImage">
+        </div>
+    </div>
+    <div>
+        <div><h3 class="stockTitle">현재 주가 현황</h3></div>
+        <div class="stockGrid3">
+        </div>
     </div>
 </div>
