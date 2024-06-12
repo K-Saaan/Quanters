@@ -16,10 +16,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const subcontainer = document.getElementById('stockGrid2');
     const subprovider = new RealGrid.LocalDataProvider(false);
     const subgridView = new RealGrid.GridView(subcontainer);
-    // 세번째 그리드를 그리기 위한 사전 설정
-    const thirdcontainer = document.getElementById('stockGrid3');
-    const thirdprovider = new RealGrid.LocalDataProvider(false);
-    const thirdgridView = new RealGrid.GridView(thirdcontainer);
 
     gridView.setDataSource(provider);
     gridView.setEditOptions({editable : false}); // 더블클릭시 그리드 셀 수정 불가능하게 설정
@@ -27,9 +23,6 @@ document.addEventListener('DOMContentLoaded', function () {
     subgridView.setDataSource(subprovider);
     subgridView.setEditOptions({editable : false}); // 더블클릭시 그리드 셀 수정 불가능하게 설정
     subgridView.displayOptions.fitStyle = "fill";
-    thirdgridView.setDataSource(thirdprovider);
-    thirdgridView.setEditOptions({editable : false}); // 더블클릭시 그리드 셀 수정 불가능하게 설정
-    thirdgridView.displayOptions.fitStyle = "fill";
 
     // 메인그리드 컬럼
     provider.setFields([
@@ -48,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
             name: "stockCode",
             fieldName: "stockCode",
             type: "data",
-            width: "120",
+            width: "90",
             header: {
                 text: "주가코드",
             },
@@ -57,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
             name: "stockName",
             fieldName: "stockName",
             type: "data",
-            width: "120",
+            width: "90",
             header: {
                 text: "주가명",
             },
@@ -81,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
             name: "stockCode",
             fieldName: "stockCode",
             type: "data",
-            width: "120",
+            width: "90",
             header: {
                 text: "주가코드",
             },
@@ -90,132 +83,9 @@ document.addEventListener('DOMContentLoaded', function () {
             name: "stockName",
             fieldName: "stockName",
             type: "data",
-            width: "120",
+            width: "90",
             header: {
                 text: "주가명",
-            },
-        },
-    ]);
-    // 서브그리드 컬럼
-    thirdprovider.setFields([
-        {
-            fieldName: "stockCode",
-            dataType: "text",
-        },
-        {
-            fieldName: "stockName",
-            dataType: "text",
-        },
-        {
-            fieldName: "stockDate",
-            dataType: "text",
-        },
-        {
-            fieldName: "openPrice",
-            dataType: "text",
-        },
-        {
-            fieldName: "highPrice",
-            dataType: "text",
-        },
-        {
-            fieldName: "lowPrice",
-            dataType: "text",
-        },
-        {
-            fieldName: "closePrice",
-            dataType: "text",
-        },
-        {
-            fieldName: "stockVolume",
-            dataType: "text",
-        },
-        {
-            fieldName: "stockChange",
-            dataType: "text",
-        },
-    ]);
-
-    thirdgridView.setColumns([
-        {
-            name: "stockCode",
-            fieldName: "stockCode",
-            type: "data",
-            width: "120",
-            header: {
-                text: "주가코드",
-            },
-        },
-        {
-            name: "stockName",
-            fieldName: "stockName",
-            type: "data",
-            width: "120",
-            header: {
-                text: "주가명",
-            },
-        },
-        {
-            name: "stockDate",
-            fieldName: "stockDate",
-            type: "data",
-            width: "120",
-            header: {
-                text: "날짜",
-            },
-        },
-        {
-            name: "openPrice",
-            fieldName: "openPrice",
-            type: "data",
-            width: "120",
-            header: {
-                text: "시가",
-            },
-        },
-        {
-            name: "highPrice",
-            fieldName: "highPrice",
-            type: "data",
-            width: "120",
-            header: {
-                text: "고가",
-            },
-        },
-        {
-            name: "lowPrice",
-            fieldName: "lowPrice",
-            type: "data",
-            width: "120",
-            header: {
-                text: "저가",
-            },
-        },
-        {
-            name: "closePrice",
-            fieldName: "closePrice",
-            type: "data",
-            width: "120",
-            header: {
-                text: "종가",
-            },
-        },
-        {
-            name: "stockVolume",
-            fieldName: "stockVolume",
-            type: "data",
-            width: "120",
-            header: {
-                text: "거래량",
-            },
-        },
-        {
-            name: "stockChange",
-            fieldName: "stockChange",
-            type: "data",
-            width: "120",
-            header: {
-                text: "변화율",
             },
         },
     ]);
@@ -295,7 +165,21 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         postajax("/stock/showStockHist", histParam, function(returnData){
             var detailData = returnData.stockList;
-            thirdprovider.fillJsonData(detailData, { fillMode : "set"});
+            // thirdprovider.fillJsonData(detailData, { fillMode : "set"});
+            var stockDateArr = []
+            var openPriceArr = []
+            var highPriceArr = []
+            var lowPriceArr = []
+            var closePriceArr = []
+            detailData.forEach(function (value) {
+                stockDateArr.push(value.stockDate)
+                openPriceArr.push(value.openPrice)
+                highPriceArr.push(value.highPrice)
+                lowPriceArr.push(value.lowPrice)
+                closePriceArr.push(value.closePrice)
+            })
+            // 차트 그래프 그리기
+            drawStockGraph(stockDateArr.reverse(), openPriceArr.reverse(), highPriceArr.reverse(), lowPriceArr.reverse(), closePriceArr.reverse());
         })
     }
 
@@ -326,4 +210,55 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    function drawStockGraph(stockDateArr, openPriceArr, highPriceArr, lowPriceArr, closePriceArr) {
+        var chart = echarts.init(document.getElementById('stockGraph'));
+        var option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross'
+                },
+                formatter: function (params) {
+                    let result = params[0].name + '<br>';
+                    for (let i = 0; i < params.length; i++) {
+                        var textColor = params[i].color;
+                        result += '<p style="color: ' + textColor + ' "' + '>' + params[i].seriesName + ': ' + params[i].value + '</p>';
+                    }
+                    return result;
+                }
+            },
+            legend: {
+            },
+            xAxis: {
+                type: 'category',
+                data: stockDateArr
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [
+                {
+                    name: '시가',
+                    type: 'line',
+                    data: openPriceArr
+                },
+                {
+                    name: '고가',
+                    type: 'line',
+                    data: highPriceArr
+                },
+                {
+                    name: '저가',
+                    type: 'line',
+                    data: lowPriceArr
+                },
+                {
+                    name: '종가',
+                    type: 'line',
+                    data: closePriceArr
+                }
+            ]
+        };
+        chart.setOption(option);
+    }
 });

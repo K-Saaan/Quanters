@@ -14,6 +14,7 @@
     <script src="//code.jquery.com/jquery.min.js"></script>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> <!-- datepicker 용도 -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> <!-- datepicker 용도 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script> <!-- echarts -->
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/common/bootstrap.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/common/bootstrap.min.js"></script>

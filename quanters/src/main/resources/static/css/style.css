@@ -49,29 +49,27 @@ body {
 }
 .stockGrid {
     margin: 20px;
-    width: 320px;
     height: 400px;
 }
 .predictGrid {
-    margin: 20px;
-    width: 150px;
     height: 150px;
-}
-.stockGrid2 {
-    margin: 20px;
-    width: 320px;
-    height: 40px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
 }
 .stockGrid3 {
     margin: 20px;
-    width: 1100px;
     height: 400px;
 }
 .stockTitle {
     margin: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.stockTitle2 {
+    margin: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-flow: column;
 }
 .stockDiv {
     display: flex;
@@ -92,11 +90,25 @@ body {
 #myGridTable {
     width: 100%;
 }
-#gridDiv {
-    margin: 20px;
+#gridLargeDiv1 {
+    margin: 0 auto;
+    width: 1600px;
+}
+#gridLargeDiv2 {
+    margin: 0 auto;
+    width: 1600px;
 }
 #gridDiv3 {
     margin: 20px;
+}
+.gridBigDiv1 {
+    width: 25%;
+}
+.gridBigDiv2 {
+    width: 50%;
+}
+.gridBigDiv2 {
+    width: 75%;
 }
 .chkBox {
     margin: 10px;
