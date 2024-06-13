@@ -47,7 +47,7 @@ public class S3Service {
                 String[] data = line.split(",", 0);
                 if (data != null) {
                     if(data[0].equals(stockName)) {
-                        if(data[6].equals("1")) {
+                        if(data[6].equals("0")) {
                             result = "up";
                         } else {
                             result = "down";
