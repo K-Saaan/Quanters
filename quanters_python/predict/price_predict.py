@@ -71,10 +71,13 @@ def price_predict(sentiment_df, stock_df, yymm, dd):
     loaded_model = joblib.load(model_path)
     
     # 예측을 수행한다.
-    pred = loaded_model.predict(pred_df)
+    pred = loaded_model.predict_proba(pred_df)[:, 0]
+    print(f'pred : {pred}')
+    
+    probs = (pred > 0.7).astype(int)
     
     #예측 결과를 pred_df['label']에 저장한다.
-    pred_df['label'] = pred
+    pred_df['label'] = probs
     pred_df['company'] = pred_df['company'].map({0:'카카오', 1:'SK하이닉스' , 2:'네이버' , 3:'삼성전자'})
     logging.info('predict df info : %s', pred_df.info())
     logging.info('predict df head : %s', pred_df.head())
