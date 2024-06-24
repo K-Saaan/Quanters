@@ -178,6 +178,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 lowPriceArr.push(value.lowPrice)
                 closePriceArr.push(value.closePrice)
             })
+            var todayData = closePriceArr[0]
+            var yesterdayData = closePriceArr[1]
+            var minusData = todayData - yesterdayData
+            $("#priceDiff").text(minusData)
+            // 어제 대비 올랐으면 빨간색 내려갔으면 파란색으로 증감 텍스트 표시
+            if(minusData > 0) {
+                $("#priceDiff").css('color','red')
+            } else {
+                $("#priceDiff").css('color','blue')
+            }
             // 차트 그래프 그리기
             drawStockGraph(stockDateArr.reverse(), openPriceArr.reverse(), highPriceArr.reverse(), lowPriceArr.reverse(), closePriceArr.reverse());
         })
@@ -192,8 +202,11 @@ document.addEventListener('DOMContentLoaded', function () {
             if(resultMsg == "up") {
                 $("#upImage").show()
                 $("#downImage").hide()
-            } else {
+            } else if(resultMsg == "down") {
                 $("#downImage").show()
+                $("#upImage").hide()
+            } else if(resultMsg == "error") {
+                $("#downImage").hide()
                 $("#upImage").hide()
             }
         })
@@ -209,6 +222,11 @@ document.addEventListener('DOMContentLoaded', function () {
             showStockPredict(stockName)
         }
     }
+
+    // 최근 일주일 데이터만 보이게 설정
+    var oneWeekMs = 7 * 24 * 60 * 60 * 1000; // 일주일의 밀리초
+    var now = new Date().getTime();
+    var oneWeekAgo = now - oneWeekMs;
 
     function drawStockGraph(stockDateArr, openPriceArr, highPriceArr, lowPriceArr, closePriceArr) {
         var chart = echarts.init(document.getElementById('stockGraph'));
@@ -227,6 +245,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     return result;
                 }
             },
+            dataZoom: [
+                {
+                    type: 'slider',
+                    show: true,
+                    start: 90,
+                    end: 100
+                }
+            ],
             legend: {
             },
             xAxis: {

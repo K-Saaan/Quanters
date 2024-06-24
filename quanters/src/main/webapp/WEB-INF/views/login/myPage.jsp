@@ -2,6 +2,14 @@
          pageEncoding="UTF-8"%>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/login/myPage.js"></script>
 <p id="hiddenStockList">${stockList}</p>
+<div class="d-flex justify-content-start" id="gridLargeDiv2">
+    <div class="gridBigDiv2">
+        <div><h3 class="stockTitle">현재 주가 현황</h3></div>
+        <div class="stockGrid3">
+            <div id="stockGraph" style="height: 100%;"></div>
+        </div>
+    </div>
+</div>
 <div class="d-flex justify-content-start" id="gridLargeDiv1">
     <div class="gridBigDiv1">
         <div class="stockTitle">
@@ -25,14 +33,6 @@
         <div class="stockGrid" id="stockGrid2">
         </div>
     </div>
-    <div class="gridBigDiv2">
-        <div><h3 class="stockTitle">현재 주가 현황</h3></div>
-        <div class="stockGrid3">
-            <div id="stockGraph" style="height: 100%;"></div>
-        </div>
-    </div>
-</div>
-<div class="d-flex justify-content-start" id="gridLargeDiv2">
     <div class="gridBigDiv1">
         <div class="stockTitle2">
             <div>
@@ -44,9 +44,13 @@
             </div>
         </div>
     </div>
-    <div class="gridBigDiv3">
+    <div class="gridBigDiv1">
         <div class="stockTitle2">
             <div>
+                <h3>전날 대비 증감</h3>
+            </div>
+            <div class="">
+                <p id="priceDiff"></p>
             </div>
         </div>
     </div>

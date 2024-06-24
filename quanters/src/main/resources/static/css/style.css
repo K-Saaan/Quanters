@@ -43,6 +43,9 @@ body {
     width: 30%;
     margin: 30px;
 }
+#priceDiff {
+    font-size: 70px;
+}
 .gridTd {
     padding: 10px;
     border: 1px solid black;
@@ -105,10 +108,7 @@ body {
     width: 25%;
 }
 .gridBigDiv2 {
-    width: 50%;
-}
-.gridBigDiv2 {
-    width: 75%;
+    width: 100%;
 }
 .chkBox {
     margin: 10px;
